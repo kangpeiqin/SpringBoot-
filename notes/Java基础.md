@@ -2,7 +2,7 @@
 
 # 语言基础
 ## I/O
-I/O的核心问题要么是数据格式影响I/O操作，要么是传输方式影响I/O操作，也就是将什么样的数据写到什么地方的问题。Java的I/O操作类在包java.io下
+I/O本质是将什么样的数据写到什么地方。所以传输数据的格式和传输数据的方式会影响的I/O的效率。Java的I/O操作类在包java.io下
 > 传输数据的数据格式
 - 基于字节：InputStream和OutputStream
 - 基于字符：Writer和Reader
