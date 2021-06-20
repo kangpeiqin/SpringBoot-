@@ -2,7 +2,7 @@
 
 # 基础
 
-[Java I/O](#IO)   [泛型](#泛型)   [并发](#并发)  [反射](#反射)   [注解](#注解)   
+[Java I/O](#IO)  [泛型](#泛型)   [并发](#并发)  [反射](#反射)   [注解](#注解)   
 
 ## I/O
 I/O本质是将什么样的数据写到什么地方。所以传输数据的格式和传输数据的方式会影响的I/O的效率。Java的I/O操作类在包java.io下
@@ -58,4 +58,22 @@ start表示启动该线程，使其成为一条单独的执行流，操作系统
 - 注解内参数类型：合法的类型有基本类型、String、Class、枚举、注解，以及这些类型的数组。参数定义时可以使用default指定一个默认值
 ### 查看注解的信息
 @Retention为RetentionPolicy.RUNTIME的注解，可以利用反射机制在运行时进行查看和利用这些信息。
-- `Annotation`接口
+- Class、Field、Method、Constructor类中都有获取注解(getAnnotations、getParameterAnnotations)、判断是否具有指定注解(isAnnotationPresent)的方法
+## 类加载
+类加载器ClassLoader就是加载其他类的类，它负责将字节码文件加载到内存，创建Class对象
+### 应用场景
+- 热部署。在不重启Java程序的情况下，动态替换类的实现。
+- 应用的模块化和相互隔离。不同的ClassLoader可以加载相同的类但互相隔离、互不影响。
+- 从不同地方灵活加载。系统默认的ClassLoader一般从本地的．class文件或jar文件中加载字节码文件，通过自定义的ClassLoader，我们可以从共享的Web服务器、数据库、缓存服务器等其他地方加载字节码文件
+### 类加载器种类
+- 引导类加载器（Bootstrap ClassLoader）：这个加载器是Java虚拟机实现的一部分，一般是C语言实现的，它负责加载Java的基础类，主要是<JAVA_HOME>/lib/rt.jar，日常用的Java类库比如String、ArrayList等都位于该包内
+- 扩展类加载器（Extension ClassLoader）：这个加载器的实现类是sun.misc.Laun-cher$ExtClassLoader，它负责加载Java的一些扩展类，一般是<JAVA_HOME>/lib/ext目录中的jar包
+- 系统类加载器（Application ClassLoader）：这个加载器的实现类是sun.misc. Launcher$AppClassLoader，它负责加载应用程序的类，包括自己写的和引入的第三方法类库，即所有在类路径中指定的类。
+### 类加载的流程
+负责加载类的类就是类加载器，它的输入是完全限定的类名，输出是Class对象
+- 1、判断是否已经加载过了，加载过了，直接返回Class对象，一个类只会被一个Class-Loader加载一次。
+- 2、如果没有被加载，先让父ClassLoader去加载，如果加载成功，返回得到的Class对象。
+- 3、在父ClassLoader没有加载成功的前提下，自己尝试加载类。
+### Q&A
+“双亲委派”模型
+- 优先让父ClassLoader去加载，可以避免Java类库被覆盖的问题。例如，当要求系统类加载器(Application ClassLoader)加载一个系统类（比如，java.util.ArrayList）时，它首先要求扩展类加载器(Extension ClassLoader)进行加载，该扩展类加载器则首先要求引导类加载器(Bootstrap ClassLoader)进行加载。
