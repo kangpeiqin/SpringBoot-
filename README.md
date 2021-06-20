@@ -1,6 +1,7 @@
 <details> 
-    <summary>每周趣闻</summary>
-    <a href="./techweek/week1.md">第一期</a> &nbsp;
+    <summary>资源汇总</summary>
+    <a href="./resource/book.md">技术书籍</a> &nbsp;&nbsp;
+    <a href="./resource/book.md">推荐网站</a> &nbsp;&nbsp;
 </details>
 
 # :cloud: 笔记整理
@@ -11,8 +12,6 @@
   <a href="./notes/JVM.md">Java虚拟机</a>&nbsp;&nbsp;
   <a href="./notes/算法.md">算法</a>&nbsp;&nbsp;
   <a href="./notes/操作系统.md">操作系统</a>&nbsp;&nbsp;
-</div>
-<div>
   <a href="./notes/分布式.md">分布式</a>&nbsp;&nbsp;
   <a href="./notes/源码阅读.md">源码阅读</a>&nbsp;&nbsp;
   <a href="./notes/计算机网络.md">计算机网络</a>&nbsp;&nbsp;
