@@ -1,7 +1,7 @@
 <details> 
     <summary>资源汇总</summary>
     <a href="./resource/book.md">技术书籍</a> &nbsp;&nbsp;
-    <a href="./resource/book.md">推荐网站</a> &nbsp;&nbsp;
+    <a href="./resource/website.md">推荐网站</a> &nbsp;&nbsp;
 </details>
 
 # :cloud: 笔记整理
