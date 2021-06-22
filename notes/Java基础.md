@@ -77,3 +77,6 @@ start表示启动该线程，使其成为一条单独的执行流，操作系统
 ### Q&A
 “双亲委派”模型
 - 优先让父ClassLoader去加载，可以避免Java类库被覆盖的问题。例如，当要求系统类加载器(Application ClassLoader)加载一个系统类（比如，java.util.ArrayList）时，它首先要求扩展类加载器(Extension ClassLoader)进行加载，该扩展类加载器则首先要求引导类加载器(Bootstrap ClassLoader)进行加载。
+## 正则表达式
+正则表达式是一串字符，它描述了一个文本模式，利用它可以方便地处理文本，包括文本的查找、替换、验证、切分等。
+## 函数式编程
