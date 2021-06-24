@@ -25,7 +25,7 @@ I/O本质是将什么样的数据写到什么地方。所以传输数据的格�
 2、定义版本号：在序列化时，会将该版本号写入流，在反序列化时，会将流中的值与类定义中的版本号进行比较，如果不匹配，会抛出InvalidClassException
 
 - 其他方式：文本格式：ⅩML和JSON、二进制：ProtoBuf、Thrift、MessagePack
-> 更多可以参考<a href="https://www.cyc2018.xyz/Java/Java%20IO.html#%E4%B8%80%E3%80%81%E6%A6%82%E8%A7%88" target="view_blank">Java I/O</a>或者<a href="https://snailclimb.gitee.io/javaguide/#/docs/java/basis/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86?id=io-%e6%b5%81" target="view_blank">I/O流</a>
+> 更多可以参考<a href="https://www.cyc2018.xyz/Java/Java%20IO.html#%E4%B8%80%E3%80%81%E6%A6%82%E8%A7%88" target="view_window">Java I/O</a>或者<a href="https://snailclimb.gitee.io/javaguide/#/docs/java/basis/Java%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86?id=io-%e6%b5%81" target="view_window">I/O流</a>
 ## 泛型
 **类型参数化**，处理的数据类型不是固定的，而是可以作为参数传入。代码与它们能够操作的数据类型不再绑定在一起，同一套代码可以用于多种数据类型
 - 作用：复用代码，降低耦合，保证类型安全，泛型提供了编译时类型安全检测机制，该机制允许程序员在编译时检测到非法的类型。
@@ -80,3 +80,4 @@ start表示启动该线程，使其成为一条单独的执行流，操作系统
 ## 正则表达式
 正则表达式是一串字符，它描述了一个文本模式，利用它可以方便地处理文本，包括文本的查找、替换、验证、切分等。
 ## 函数式编程
+Lambda表达式：一种紧凑的传递代码的方式。针对常见的集合数据处理，Java 8引入了一套新的类库，位于包java.util.stream下，称为Stream API。
