@@ -11,6 +11,18 @@
 - [正则表达式](#正则表达式) 
 - [函数式编程](#函数式编程)
 ## 集合
+Java 集合框架主要包括两种类型的容器，一种是Collection，存储一个元素集合，另一种是Map，存储键/值对映射。
+Collection 接口又有根据容器的不同特点划分出 3 种子类型：List(按照顺序保存元素)、Set(集合：不保存重复的元素) 和 Queue(队列：先进先出)，接下来用抽象类(实现了一些公共的逻辑(设计模式当中的模板模式))，最后是具体实现类。
+<img src="https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d20706cc84b7421daa747c1566bde4a5~tplv-k3u1fbpfcp-watermark.image">
+<img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e777e3b6451b45d8804d0e92e7dd0952~tplv-k3u1fbpfcp-watermark.image">
+### HashMap
+#### <a href="https://tech.meituan.com/2016/06/24/java-hashmap.html">底层原理</a>
+#### HashMap线程安全问题
+HashMap不是并发安全的，在并发更新的情况下，HashMap可能出现死循环，占满CPU。
+- <a href="https://coolshell.cn/articles/9606.html">为什么会出现死循环</a>
+ 
+ 死循环出现在多个线程同时扩容哈希表的时候
+
 ## I/O
 I/O本质是将什么样的数据写到什么地方。所以传输数据的格式和传输数据的方式会影响的I/O的效率。Java的I/O操作类在包java.io下
 > 传输数据的数据格式
