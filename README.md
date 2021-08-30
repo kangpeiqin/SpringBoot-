@@ -16,5 +16,5 @@
   <a href="./notes/分布式.md">分布式</a>&nbsp;&nbsp;
   <a href="./notes/源码阅读.md">源码阅读</a>&nbsp;&nbsp;
   <a href="./notes/计算机网络.md">计算机网络</a>&nbsp;&nbsp;
-  <a href="./notes/Go语言.md">计算机网络</a>&nbsp;&nbsp;
+  <a href="./notes/Go语言.md">Go语言</a>&nbsp;&nbsp;
 </div>
