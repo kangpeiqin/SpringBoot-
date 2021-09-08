@@ -9,6 +9,7 @@
 <div>
   <li><a href="./notes/Java基础.md">Java基础</a> </li>
   <li><a href="./notes/数据库.md">数据库</a></li>
+  <li><a href="./notes/designPattern.md">设计模式</a></li>
   <li><a href="./notes/Redis.md">Redis</a></li>
   <li><a href="./notes/JVM.md">Java虚拟机</a></li>
   <li><a href="./notes/framework.md">常用框架</a></li>
