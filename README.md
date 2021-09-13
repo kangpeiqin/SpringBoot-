@@ -13,7 +13,7 @@
   <li><a href="./notes/Redis.md">Redis</a></li>
   <li><a href="./notes/JVM.md">Java虚拟机</a></li>
   <li><a href="./notes/framework.md">常用框架</a></li>
-  <li><a href="./notes/算法.md">算法</a></li>
+  <li><a href="./notes/数据结构&算法.md">算法</a></li>
   <li><a href="./notes/操作系统.md">操作系统</a></li>
   <li><a href="./notes/分布式.md">分布式</a></li>
   <li><a href="./notes/源码阅读.md">源码阅读</a></li>
