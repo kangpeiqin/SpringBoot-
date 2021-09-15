@@ -30,7 +30,10 @@
 - [重建二叉树](#重建二叉树)
 - [数值的整数次方](#数值的整数次方)
 - [二叉搜索树的后序遍历序列](#二叉搜索树的后序遍历序列)
-
+## [图算法](#图算法)
+- [二分图](#二分图)
+- [所有路径](#所有路径)
+- [课程顺序](#课程顺序)
 ## 栈与队列
 ### 用两个栈实现队列
 [剑指 Offer 09. 用两个栈实现队列](https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/)
@@ -661,4 +664,22 @@ class Solution {
         return p==j && recur(postorder,i,m-1)&&recur(postorder,m,j-1);
     }
 }
+```
+## 图算法
+### 二分图
+[剑指 Offer II 106. 二分图](https://leetcode-cn.com/problems/vEAB3K/)
+> 题目描述：
+```java
+
+```
+### 所有路径
+[剑指 Offer II 110. 所有路径](https://leetcode-cn.com/problems/bP4bmD/)
+> 题目描述：
+```java
+
+```
+### 课程顺序
+[剑指 Offer II 113. 课程顺序](https://leetcode-cn.com/problems/QA2IGt/)
+```java
+
 ```
