@@ -78,25 +78,28 @@ class Solution {
 ### 无重复字符的最长子串
 - [3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
 ```java
-class Solution{
-     public int lengthOfLongestSubstring(String s) {
-        Set<Character> set = new HashSet<>();
-        int n = s.length(), rk = -1, ans = 0;
-        //遍历字符串
-        for (int i = 0; i < n; i++) {
-          //将首位前面的字符移除
-          if (i > 0) {
-            set.remove(s.charAt(i - 1));
-          }
-          //遇到重复的字符，则不会执行
-          while (rk + 1 < n && !set.contains(s.charAt(rk + 1))) {
-            set.add(s.charAt(rk + 1));
-            rk++;
-          }
-          ans = Math.max(ans, rk - i + 1);
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        //特殊情况判断
+        if(s.length() == 0 || s.length() == 1){
+            return s.length();
         }
-        return ans;
-      }
+        Set<Character> set = new HashSet<>();
+        char[] strs = s.toCharArray();
+        //index表示当前正要被加入集合的字符的下标
+        int max = 1,index = 0,len = strs.length;;
+        for(int i = 0; i < strs.length; i++){
+            //表示从 i-index的字串
+            if(i > 0){
+                set.remove(strs[i-1]);
+            }
+            while(index < len && !set.contains(strs[index])){
+                set.add(strs[index++]);
+            }
+            max = Math.max(index - i,max);
+        }
+        return max;
+    }
 }
 ```
 ### 寻找两个正序数组的中位数
