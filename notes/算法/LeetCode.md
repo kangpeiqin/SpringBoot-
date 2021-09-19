@@ -32,6 +32,7 @@ class Solution {
 ```
 ### 两数相加
 [2. 两数相加](https://leetcode-cn.com/problems/add-two-numbers/)
+> 考虑进位情况，遍历链表，将结点逐个进行相加
 ```java
 class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
@@ -77,6 +78,7 @@ class Solution {
 ```
 ### 无重复字符的最长子串
 - [3. 无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)
+> 利用集合中元素的唯一性进行求解
 ```java
 class Solution {
     public int lengthOfLongestSubstring(String s) {
@@ -104,6 +106,7 @@ class Solution {
 ```
 ### 寻找两个正序数组的中位数
 [4. 寻找两个正序数组的中位数](https://leetcode-cn.com/problems/median-of-two-sorted-arrays/)
+> 合并数组后求取中位数
 ```java
 class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
