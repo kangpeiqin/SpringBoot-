@@ -3,7 +3,7 @@
 # Spring-framework 源码阅读
 ## 源码编译
 > - 下载源码并导入到`IDEA`中
-> - 创建并切换分支：`git checkout -b v5.2.13.RELEASE` 
+> - 切换分支：`git checkout -b v5.2.13.RELEASE` 
 > - 在IDEA中的Terminal窗口中执行命令：`gradlew :spring-oxm:compileTestJava`
 - 运行单元测试报错问题
 ```text

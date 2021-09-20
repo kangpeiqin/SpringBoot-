@@ -10,7 +10,7 @@
 - [字符串转换整数](#字符串转换整数)
 - [回文数](#回文数)
 - [盛最多水的容器](#盛最多水的容器)
-
+- [整数转罗马数字](#整数转罗马数字)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -343,6 +343,28 @@ class Solution {
             }
         }
         return maxArea;
+    }
+}
+```
+### 整数转罗马数字
+[12. 整数转罗马数字](https://leetcode-cn.com/problems/integer-to-roman/)
+> 采用双数组进行映射
+```java
+class Solution {
+    public String intToRoman(int num) {
+        String[] roman = {"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","III","II","I"};
+        int[] arr = {1000,900,500,400,100,90,50,40,10,9,5,4,3,2,1};
+        StringBuilder res = new StringBuilder();
+        for(int i = 0;i < arr.length; i++){
+            if(num == 0){
+                break;
+            }
+            while(num - arr[i] >= 0){
+                res.append(roman[i]);
+                num -= arr[i];
+            }
+        }
+        return res.toString();
     }
 }
 ```
