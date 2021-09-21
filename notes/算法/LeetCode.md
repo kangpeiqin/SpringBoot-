@@ -11,6 +11,8 @@
 - [回文数](#回文数)
 - [盛最多水的容器](#盛最多水的容器)
 - [整数转罗马数字](#整数转罗马数字)
+- [有效的括号](#有效的括号)
+- [合并两个有序链表](#合并两个有序链表)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -365,6 +367,57 @@ class Solution {
             }
         }
         return res.toString();
+    }
+}
+```
+### 有效的括号
+[20.有效的括号](https://leetcode-cn.com/problems/valid-parentheses/)
+> 利用栈作为辅助进行判断
+```java
+class Solution {
+    public boolean isValid(String s) {
+        Map<Character,Character> map = new HashMap<>();
+        map.put('(',')');
+        map.put('[',']');
+        map.put('{','}');
+        Stack<Character> stack = new Stack<>();
+        char[] strs = s.toCharArray();
+        for(char c : strs){
+            if(c == '(' || c == '[' || c == '{'){
+                stack.add(c);
+            }else{
+                if(stack.isEmpty() || map.get(stack.pop()) != c){
+                    return false;
+                }
+            }
+        }
+        return stack.isEmpty();
+    }
+}
+```
+### 合并两个有序链表
+[21.合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+```java
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode(),p = dummy;
+        while(l1 != null && l2 != null){
+            if(l1.val <= l2.val){
+                p.next = l1;
+                l1 = l1.next;
+            }else{
+                p.next = l2;
+                l2 = l2.next;
+            }
+            p = p.next;
+        }
+        if(l1 != null){
+            p.next = l1;
+        }
+        if(l2 != null){
+            p.next = l2;
+        }
+        return dummy.next;
     }
 }
 ```
