@@ -424,6 +424,7 @@ class Solution {
 ```
 ### 两两交换链表中的节点
 [24.两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)
+> 利用双指针法进行求解，需要注意边界条件的判断
 ```java
 class Solution {
     public ListNode swapPairs(ListNode head) {
