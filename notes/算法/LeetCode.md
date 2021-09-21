@@ -13,6 +13,7 @@
 - [整数转罗马数字](#整数转罗马数字)
 - [有效的括号](#有效的括号)
 - [合并两个有序链表](#合并两个有序链表)
+- [两两交换链表中的节点](#两两交换链表中的节点)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -416,6 +417,32 @@ class Solution {
         }
         if(l2 != null){
             p.next = l2;
+        }
+        return dummy.next;
+    }
+}
+```
+### 两两交换链表中的节点
+[24.两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)
+```java
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode p = head,q = head.next;
+        ListNode dummy = new ListNode(),k = dummy;
+        while(p != null && q != null){
+           k.next = new ListNode(q.val);
+           k.next.next = new ListNode(p.val);
+           k = k.next.next;
+           p = q.next;
+           if(p != null){
+               q = p.next;
+           }
+        }
+        if(q == null){
+            k.next = new ListNode(p.val);
         }
         return dummy.next;
     }
