@@ -14,6 +14,7 @@
 - [有效的括号](#有效的括号)
 - [合并两个有序链表](#合并两个有序链表)
 - [两两交换链表中的节点](#两两交换链表中的节点)
+- [合并K个升序链表](#合并K个升序链表)
 - [K个一组翻转链表](#K个一组翻转链表)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
@@ -420,6 +421,39 @@ class Solution {
             p.next = l2;
         }
         return dummy.next;
+    }
+}
+```
+### 合并K个升序链表
+[23.合并K个升序链表](https://leetcode-cn.com/problems/merge-k-sorted-lists/)
+> 将两两结点进行合并
+```java
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        ListNode ans = null;
+        for(int i = 0;i < lists.length;i++){
+            ans = merge(ans,lists[i]);
+        }
+        return ans;
+    }
+
+    private ListNode merge(ListNode a,ListNode b){
+        if(a == null || b == null){
+            return a == null? b : a;
+        }
+        ListNode head = new ListNode(),tail = head,p = a,q= b;
+        while(p != null && q != null){
+            if(p.val < q.val){
+                tail.next = p;
+                p = p.next;
+            }else{
+                tail.next = q;
+                q = q.next;
+            }
+            tail = tail.next;
+        }
+        tail.next = p == null ? q : p;
+        return head.next;
     }
 }
 ```
