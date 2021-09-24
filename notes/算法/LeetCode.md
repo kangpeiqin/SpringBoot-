@@ -14,6 +14,7 @@
 - [有效的括号](#有效的括号)
 - [合并两个有序链表](#合并两个有序链表)
 - [两两交换链表中的节点](#两两交换链表中的节点)
+- [K个一组翻转链表](#K个一组翻转链表)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -446,6 +447,47 @@ class Solution {
             k.next = new ListNode(p.val);
         }
         return dummy.next;
+    }
+}
+```
+### K个一组翻转链表
+[25. K 个一组翻转链表](https://leetcode-cn.com/problems/reverse-nodes-in-k-group/)
+> K个结点一组翻转后进行重新连接
+```java
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode(0),pre = dummy;
+        dummy.next = head;
+        while(head != null){
+            ListNode tail = pre;
+            for(int i = 0; i < k; i++){
+                tail = tail.next;
+                //不需要翻转，直接返回结果
+                if(tail == null){
+                    return dummy.next;
+                }
+            }
+            ListNode next = tail.next; 
+            ListNode[] node = reverse(head,tail);
+            head = node[0];
+            tail = node[1];
+            pre.next = head;
+            tail.next = next;
+            head = next;
+            pre = tail;
+        }
+        return dummy.next;
+    }
+    private ListNode[] reverse(ListNode head,ListNode tail){
+        //p为遍历指针
+        ListNode prev = tail.next,p = head;
+        while(prev != tail){
+            ListNode next = p.next;
+            p.next = prev;
+            prev = p;
+            p = next;
+        }
+        return new ListNode[]{tail,head};
     }
 }
 ```
