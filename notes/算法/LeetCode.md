@@ -19,6 +19,7 @@
 - [合并K个升序链表](#合并K个升序链表)
 - [K个一组翻转链表](#K个一组翻转链表)
 - [删除有序数组中的重复项](#删除有序数组中的重复项)
+- [移除元素](#移除元素)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -587,6 +588,21 @@ class Solution {
             }
         }
         return index + 1;
+    }
+}
+```
+### 移除元素
+[27.移除元素](https://leetcode-cn.com/problems/remove-element/)
+```java
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int index = 0;
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] != val){
+                nums[index++] = nums[i];
+            }
+        }
+        return index;
     }
 }
 ```
