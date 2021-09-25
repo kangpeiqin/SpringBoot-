@@ -18,6 +18,7 @@
 - [两两交换链表中的节点](#两两交换链表中的节点)
 - [合并K个升序链表](#合并K个升序链表)
 - [K个一组翻转链表](#K个一组翻转链表)
+- [删除有序数组中的重复项](#删除有序数组中的重复项)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -571,6 +572,21 @@ class Solution {
             p = next;
         }
         return new ListNode[]{tail,head};
+    }
+}
+```
+### 删除有序数组中的重复项
+[26.删除有序数组中的重复项](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array/)
+```java
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int index = 0;
+        for(int i = 1; i < nums.length; i++){
+            if(nums[index] != nums[i]){
+                nums[++index] = nums[i];
+            }
+        }
+        return index + 1;
     }
 }
 ```
