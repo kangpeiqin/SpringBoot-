@@ -11,6 +11,7 @@
 - [回文数](#回文数)
 - [盛最多水的容器](#盛最多水的容器)
 - [整数转罗马数字](#整数转罗马数字)
+- [删除链表的倒数第N个结点](#删除链表的倒数第N个结点)
 - [有效的括号](#有效的括号)
 - [合并两个有序链表](#合并两个有序链表)
 - [括号生成](#括号生成)
@@ -371,6 +372,26 @@ class Solution {
             }
         }
         return res.toString();
+    }
+}
+```
+### 删除链表的倒数第N个结点
+[19.删除链表的倒数第 N 个结点](https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/)
+```java
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(),p,q;
+        dummy.next = head;
+        p = q = dummy;
+        while(n-- > 0){
+            p = p.next;
+        }
+        while(p.next != null){
+            q = q.next;
+            p = p.next;
+        }
+        q.next = q.next.next;
+        return dummy.next;
     }
 }
 ```
