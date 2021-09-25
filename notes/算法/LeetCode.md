@@ -13,6 +13,7 @@
 - [整数转罗马数字](#整数转罗马数字)
 - [有效的括号](#有效的括号)
 - [合并两个有序链表](#合并两个有序链表)
+- [括号生成](#括号生成)
 - [两两交换链表中的节点](#两两交换链表中的节点)
 - [合并K个升序链表](#合并K个升序链表)
 - [K个一组翻转链表](#K个一组翻转链表)
@@ -421,6 +422,33 @@ class Solution {
             p.next = l2;
         }
         return dummy.next;
+    }
+}
+```
+### 括号生成
+[22.括号生成](https://leetcode-cn.com/problems/generate-parentheses/)
+> 深度优先遍历
+```java
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> ans = new ArrayList<>();
+        dfs(ans, n, 0, 0, "");
+        return ans;
+    }
+    private void dfs(List<String> ans,int n,int left,int right,String str){
+        if(left > n){
+            return;
+        }
+        if(left == n && left == right){
+            ans.add(str);
+            return;
+        }
+        if(left < n){
+            dfs(ans, n, left+1, right, str + "(");
+        }
+        if(left > right){
+            dfs(ans, n, left, right + 1 ,str + ")");
+        }    
     }
 }
 ```
