@@ -609,6 +609,7 @@ class Solution {
 ```
 ### 最长有效括号
 [32.最长有效括号](https://leetcode-cn.com/problems/longest-valid-parentheses/)
+> 遍历字符串，利用栈存储有效括号字串的起始位置
 ```java
 class Solution {
     public int longestValidParentheses(String s) {
