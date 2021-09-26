@@ -20,6 +20,7 @@
 - [K个一组翻转链表](#K个一组翻转链表)
 - [删除有序数组中的重复项](#删除有序数组中的重复项)
 - [移除元素](#移除元素)
+- [最长有效括号](#最长有效括号)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -603,6 +604,30 @@ class Solution {
             }
         }
         return index;
+    }
+}
+```
+### 最长有效括号
+[32.最长有效括号](https://leetcode-cn.com/problems/longest-valid-parentheses/)
+```java
+class Solution {
+    public int longestValidParentheses(String s) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        int max = 0;
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == '('){
+                stack.push(i);
+            }else{
+                stack.pop();
+                if(stack.isEmpty()){
+                    stack.push(i);
+                }else{
+                    max = Math.max(max,i - stack.peek());
+                }
+            }
+        }
+        return max;
     }
 }
 ```
