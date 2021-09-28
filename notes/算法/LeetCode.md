@@ -21,6 +21,7 @@
 - [删除有序数组中的重复项](#删除有序数组中的重复项)
 - [移除元素](#移除元素)
 - [最长有效括号](#最长有效括号)
+- [在排序数组中查找元素的第一个和最后一个位置](#在排序数组中查找元素的第一个和最后一个位置)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -631,4 +632,9 @@ class Solution {
         return max;
     }
 }
+```
+### 在排序数组中查找元素的第一个和最后一个位置
+[34.在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+```java
+
 ```
