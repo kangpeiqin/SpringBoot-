@@ -22,6 +22,7 @@
 - [移除元素](#移除元素)
 - [最长有效括号](#最长有效括号)
 - [在排序数组中查找元素的第一个和最后一个位置](#在排序数组中查找元素的第一个和最后一个位置)
+- [搜索插入位置](#搜索插入位置)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -652,6 +653,25 @@ class Solution {
         while(low < high){
             int mid = low + (high - low) / 2;
             if(nums[mid] > target || (lower && nums[mid] >= target)){
+                high = mid;
+            }else{
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
+}
+```
+### 搜索插入位置
+[35.搜索插入位置](https://leetcode-cn.com/problems/search-insert-position/)
+> 二分查找：查找第一个大于等于`target`的下标
+```java
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int low = 0,high = nums.length;
+        while(low < high){
+            int mid = low + (high - low)/2;
+            if(nums[mid] >= target){
                 high = mid;
             }else{
                 low = mid + 1;
