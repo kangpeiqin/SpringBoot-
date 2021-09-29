@@ -635,6 +635,29 @@ class Solution {
 ```
 ### 在排序数组中查找元素的第一个和最后一个位置
 [34.在排序数组中查找元素的第一个和最后一个位置](https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+> 利用二分查找：寻找第一个大于等于`target`的下标和第一个大于`target`的下标
 ```java
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int left = binarySearch(nums,target,true);
+        int right = binarySearch(nums,target,false) - 1;
+        if(left < nums.length && nums[left] == target){
+            return new int[]{left,right};
+        }
+        return new int[]{-1,-1};
+    }
 
+    private int binarySearch(int[] nums,int target,boolean lower){
+        int low = 0, high = nums.length;
+        while(low < high){
+            int mid = low + (high - low) / 2;
+            if(nums[mid] > target || (lower && nums[mid] >= target)){
+                high = mid;
+            }else{
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
+}
 ```
