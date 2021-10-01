@@ -3,6 +3,7 @@
 ## [二分查找](#二分查找)
 - [在排序数组中查找数字I](#在排序数组中查找数字I)
 - [查找插入位置](#查找插入位置)
+- [排序数组中只出现一次的数字](#排序数组中只出现一次的数字)
 ## [栈与队列](#栈与队列) 
 - [用两个栈实现队列](#用两个栈实现队列) 
 - [包含min函数的栈](#包含min函数的栈)
@@ -79,6 +80,23 @@ class Solution {
             }
         }
         return low;
+    }
+}
+```
+### 排序数组中只出现一次的数字
+[剑指 Offer II 070. 排序数组中只出现一次的数字](https://leetcode-cn.com/problems/skFtm2/)
+```java
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        if(nums.length == 1){
+            return nums[0];
+        }
+        for(int i = 1;i < nums.length-1;i+=2){
+            if(nums[i] != nums[i-1]){
+                return nums[i-1];
+            }
+        }
+        return nums[nums.length - 1];
     }
 }
 ```
