@@ -1,5 +1,8 @@
 <p> <a href="../数据结构&算法.md">返回</a></p>
 
+## [二分查找](#二分查找)
+- [在排序数组中查找数字I](#在排序数组中查找数字I)
+- [查找插入位置](#查找插入位置)
 ## [栈与队列](#栈与队列) 
 - [用两个栈实现队列](#用两个栈实现队列) 
 - [包含min函数的栈](#包含min函数的栈)
@@ -34,6 +37,51 @@
 - [二分图](#二分图)
 - [所有路径](#所有路径)
 - [课程顺序](#课程顺序)
+
+## 二分查找
+### 在排序数组中查找数字I
+[剑指 Offer 53 - I. 在排序数组中查找数字 I](https://leetcode-cn.com/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/)
+> 题目描述：统计一个数字在排序数组中出现的次数。
+```java
+class Solution {
+    public int search(int[] nums, int target) {
+        int left = binarySearch(nums,target);
+        int right = binarySearch(nums,target + 1);
+        return right - left;
+    }
+    private int binarySearch(int[] nums,int target){
+        int low = 0, high = nums.length;
+        while(low < high){
+            int mid = low + (high - low)/2;
+            if(nums[mid] >= target){
+                high = mid;
+            }else{
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
+}
+```
+### 查找插入位置
+[剑指 Offer II 068. 查找插入位置](https://leetcode-cn.com/problems/N6YdxV/)
+> 利用二分查找在有序数组中查找第一个大于等于`target`的数值下标
+```java
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int low = 0,high = nums.length;
+        while(low < high){
+            int mid = low + (high - low)/2;
+            if(nums[mid] >= target){
+                high = mid;
+            }else{
+                low = mid + 1;
+            }
+        }
+        return low;
+    }
+}
+```
 ## 栈与队列
 ### 用两个栈实现队列
 [剑指 Offer 09. 用两个栈实现队列](https://leetcode-cn.com/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/)

@@ -223,6 +223,7 @@ class Solution {
 ```
 ### Z字形变换
 [6. Z 字形变换](https://leetcode-cn.com/problems/zigzag-conversion/)
+> 判断字符需要放入到哪个容器当中，边界条件要进行判断特殊处理
 ```java
 class Solution {
     public String convert(String s, int numRows) {
@@ -608,7 +609,7 @@ class Solution {
 ```
 ### 最长有效括号
 [32.最长有效括号](https://leetcode-cn.com/problems/longest-valid-parentheses/)
-> 遍历字符串，利用栈存储有效括号字串的起始位置
+> 遍历字符串，利用栈存储子串的起始位置
 ```java
 class Solution {
     public int longestValidParentheses(String s) {
