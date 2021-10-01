@@ -225,36 +225,32 @@ class Solution {
 [6. Z 字形变换](https://leetcode-cn.com/problems/zigzag-conversion/)
 ```java
 class Solution {
-       public String convert(String s, int numRows) {
-        //numRows==1的特殊情况！！
-        if (numRows == 1) {
+    public String convert(String s, int numRows) {
+        //边界条件需要考虑
+        if(s == null||numRows == 1){
             return s;
         }
         List<StringBuilder> list = new ArrayList<>();
-        //判断最终的结果有几行,并由此构建几个StringBuilder
-        for (int i = 0; i < Math.min(numRows, s.length()); i++) {
-//            StringBuilder sb = new StringBuilder();
-//            list.add(sb);
-            //简洁做法：
+        for(int i = 0;i < numRows; i++){
             list.add(new StringBuilder());
         }
-        //设置遍历的方向为
-        int rowIndex = 0;
-        boolean goingDonw = false;
-        //遍历字符串,判断每个字符属于哪个行当中
-        for (int i = 0; i < s.length(); i++) {
-            list.get(rowIndex).append(s.charAt(i));
-            //这步很关键
-            if (rowIndex == 0 || rowIndex == numRows - 1) {
-                goingDonw = !goingDonw;
+        boolean down = false;
+        int index = 0;
+        //遍历字符串
+        for(int i = 0; i < s.length(); i++){
+            //获取字符串容器
+            StringBuilder sb = list.get(index);
+            sb.append(s.charAt(i));
+            if(index == numRows - 1 || index == 0){
+                down = !down;
             }
-            rowIndex += goingDonw ? 1 : -1;
+            index += down ? 1 :  - 1;
         }
-        StringBuilder ret = new StringBuilder();
-        for (StringBuilder sb : list) {
-            ret.append(sb);
+        StringBuilder res = new StringBuilder();
+        for(int i = 0; i < list.size(); i++){
+            res.append(list.get(i).toString());
         }
-        return ret.toString();
+        return res.toString();
     }
 }
 ```
