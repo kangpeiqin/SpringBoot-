@@ -21,6 +21,7 @@
 - [删除有序数组中的重复项](#删除有序数组中的重复项)
 - [移除元素](#移除元素)
 - [最长有效括号](#最长有效括号)
+- [下一个排列](#下一个排列)
 - [搜索旋转排序数组](#搜索旋转排序数组)
 - [在排序数组中查找元素的第一个和最后一个位置](#在排序数组中查找元素的第一个和最后一个位置)
 - [搜索插入位置](#搜索插入位置)
@@ -604,6 +605,39 @@ class Solution {
             }
         }
         return index;
+    }
+}
+```
+### 下一个排列
+[31.下一个排列](https://leetcode-cn.com/problems/next-permutation/)
+> 需要寻找规律，注意边界条件
+```java
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int i = nums.length - 2;
+        //边界条件需要注意
+        while(i >= 0 && nums[i] >= nums[i + 1]){
+            i--;
+        }
+        if(i >= 0){
+            int j = nums.length - 1;
+            while(j >= 0 && nums[i] >= nums[j]){
+                j--;
+            }
+            swap(nums,i,j);
+        }
+        reverse(nums,i+1);
+    }
+    private void swap(int[] nums,int i,int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+    private void reverse(int[] nums,int start){
+        int left = start,right = nums.length - 1;
+        while(left < right){
+            swap(nums,left++,right--);
+        }
     }
 }
 ```
