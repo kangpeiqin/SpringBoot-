@@ -30,6 +30,7 @@
 ## [排序](#排序)
 - [把数组排成最小的数](#把数组排成最小的数) 
 - [扑克牌中的顺子](#扑克牌中的顺子)
+- [合并区间](#合并区间)
 ## [分治算法](#分治算法)
 - [重建二叉树](#重建二叉树)
 - [数值的整数次方](#数值的整数次方)
@@ -646,6 +647,29 @@ class Solution {
             }
         }
         return nums[4] - nums[joker] < 5;
+    }
+}
+```
+### 合并区间
+[剑指 Offer II 074. 合并区间](https://leetcode-cn.com/problems/SsGoHC/)
+```java
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        if (intervals == null || intervals.length == 0) {
+            return intervals;
+        }
+        Arrays.sort(intervals, Comparator.comparing(o -> o[0]));
+        List<int[]> res = new ArrayList<>();
+        res.add(intervals[0]);
+        for (int i = 1; i < intervals.length; i++) {
+            int[] element = res.get(res.size() - 1);
+            if (element[1] >= intervals[i][0]) {
+                element[1] = Math.max(intervals[i][1], element[1]);
+            } else {
+                res.add(intervals[i]);
+            }
+        }
+        return res.toArray(new int[res.size()][2]);
     }
 }
 ```
