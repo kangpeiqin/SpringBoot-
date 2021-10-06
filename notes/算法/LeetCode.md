@@ -25,6 +25,7 @@
 - [搜索旋转排序数组](#搜索旋转排序数组)
 - [在排序数组中查找元素的第一个和最后一个位置](#在排序数组中查找元素的第一个和最后一个位置)
 - [搜索插入位置](#搜索插入位置)
+- [全排列](#全排列)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -740,6 +741,38 @@ class Solution {
             }
         }
         return low;
+    }
+}
+```
+### 全排列
+[46.全排列](https://leetcode-cn.com/problems/permutations/)
+> 回溯算法：访问标记数组
+```java
+class Solution {
+   public List<List<Integer>> permute(int[] nums) {
+        int len = nums.length;
+        List<List<Integer>> ans = new ArrayList<>();
+        boolean[] visit = new boolean[len];
+        Deque<Integer> path = new ArrayDeque<>();
+        dfs(nums, len, visit, path, 0, ans);
+        return ans;
+    }
+
+    private void dfs(int[] nums, int len, boolean[] visit, Deque<Integer> path,
+                            int depth, List<List<Integer>> ans) {
+        if (depth == len) {
+            ans.add(new ArrayList<>(path));
+        }
+        for (int i = 0; i < len; i++) {
+            if (!visit[i]) {
+                path.add(nums[i]);
+                visit[i] = true;
+                dfs(nums, len, visit, path, depth + 1, ans);
+                //回溯
+                path.removeLast();
+                visit[i] = false;
+            }
+        }
     }
 }
 ```
