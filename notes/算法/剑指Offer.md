@@ -35,6 +35,8 @@
 - [重建二叉树](#重建二叉树)
 - [数值的整数次方](#数值的整数次方)
 - [二叉搜索树的后序遍历序列](#二叉搜索树的后序遍历序列)
+## [回溯法](#回溯法)
+- [所有子集](#所有子集)
 ## [图算法](#图算法)
 - [二分图](#二分图)
 - [所有路径](#所有路径)
@@ -752,6 +754,39 @@ class Solution {
             p++;
         }
         return p==j && recur(postorder,i,m-1)&&recur(postorder,m,j-1);
+    }
+}
+```
+## 回溯法
+### 所有子集
+[剑指 Offer II 079. 所有子集](https://leetcode-cn.com/problems/TVdhkn/)
+```java
+class Solution {
+   public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (nums.length == 0) {
+            return res;
+        }
+        Deque<Integer> subset = new LinkedList<>();
+        backtracking(nums, 0, res, subset);
+        return res;
+    }
+
+    private void backtracking(int[] nums, int deep, List<List<Integer>> res, Deque<Integer> subset) {
+        //遍历到根结点，加入结果集合，到达指定的深度
+        if (deep == nums.length) {
+            res.add(new ArrayList<>(subset));
+            return;
+        }
+        //由于不打算将该数字添加到子集中，因此不对子集进行任何操作，
+        // 只需要调用递归函数backtracking处理数组nums中的下一个数字（下标增加1）就可以。
+        backtracking(nums, deep + 1, res, subset);
+        //考虑将下标为index的数字添加到子集subset的情形
+        subset.add(nums[deep]);
+        //接下来调用递归函数处理数组nums中的下一个数字（下标增加1）
+        backtracking(nums, deep + 1, res, subset);
+        //在回溯到父节点之前，应该清除已经对子集状态进行的修改。
+        subset.removeLast();
     }
 }
 ```
