@@ -7,3 +7,6 @@
 - 深入浅出Java多线程：https://redspider.gitbook.io/concurrent/
 - Hello GitHub：https://hellogithub.com/
 - JavaLearning: https://github.com/Tyson0314/Java-learning#spring-boot
+- 秒杀系统设计: https://juejin.cn/post/6844903871500795912
+- Resume: https://zhuanlan.zhihu.com/p/362447316
+- JCSprout：https://github.com/crossoverJie/JCSprout
