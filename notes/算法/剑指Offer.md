@@ -4,6 +4,7 @@
 - [二进制加法](#二进制加法)
 - [前n个数字二进制中1的个数](#前n个数字二进制中1的个数)
 - [只出现一次的数字](#只出现一次的数字)
+- [排序数组中两个数字之和](#排序数组中两个数字之和)
 ## [二分查找](#二分查找)
 - [在排序数组中查找数字I](#在排序数组中查找数字I)
 - [查找插入位置](#查找插入位置)
@@ -119,6 +120,27 @@ class Solution {
             }
         }
         return ans;
+    }
+}
+```
+### 排序数组中两个数字之和
+[排序数组中两个数字之和](https://leetcode-cn.com/problems/kLl5u1/)
+> 双指针
+```java
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int i = 0, j = numbers.length - 1;
+        while(i < j){
+            int sum = numbers[i] + numbers[j];
+            if(sum==target){
+                return new int[]{i,j};
+            }else if(sum<target){
+                i++;
+            }else{
+                j--;
+            }
+        }
+        return new int[0];
     }
 }
 ```
