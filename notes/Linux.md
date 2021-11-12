@@ -1,7 +1,6 @@
 <p> <a href="../README.md">返回首页</a></p>
 
 ## Linux常用命令
-- 系统信息查看
 ```shell
 # 操作系统内核信息
 uname -a 
@@ -39,8 +38,8 @@ free -m
 # 性能监控
 vmstat 2 1 # 2表示每2秒采集一次状态信息, 1表示只采集一次(忽略既是一直采集)
 ```
-
 ## Shell脚本
+### 数据库自动备份
 
 
 - 参考：https://www.runoob.com/linux/linux-vim.html
