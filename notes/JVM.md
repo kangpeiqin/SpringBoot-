@@ -43,4 +43,15 @@ Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为
 > 是一种以获取最短回收停顿时间为目标的收集器。
 - G1收集器
 > 是一款面向服务端应用的垃圾收集器。可以不需要停顿Java线程执行GC动作，进行分代收集。
+## 性能监控工具
+### 系统问题定位
+运行日志、异常堆栈、GC日志、线程快照、堆转储快照
+### 监控工具
+- `jps`(JVM Process Status Tool): 虚拟机进程状况
+- `jstat`(JVM Process Status Tool): 虚拟机统计信息监视工具(虚拟机进程中的类装载、内存、垃圾收集、JIT编译等运行数据)
+- `jinfo`(Configuration Info for Java): 实时地查看和调整虚拟机各项参数
+- `jmap`(Memory Map for Java): 命令用于生成堆转储快照
+- `jhat`(JVM Heap Analysis Tool)：虚拟机堆转储快照分析工具
+- `jstack`(Stack Trace for Java): 命令用于生成虚拟机当前时刻的线程快照
+
 
