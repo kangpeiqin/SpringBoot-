@@ -9,9 +9,6 @@
 ### Spring Security
 - 基础原理：https://blog.csdn.net/u012702547/article/details/89629415
 ### OAuth 2.0
-
-## Spring Security
-### OAuth 2.0
 - 授权服务器的配置
 > 使用`@EnableAuthorizationServer`表示开启授权服务器。
 > - 继承`AuthorizationServerConfigurerAdapter`，并重写方法。主要设置授权服务器如何读取客户端、用户信息和一些端点配置。
