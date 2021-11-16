@@ -10,3 +10,6 @@
 - 秒杀系统设计: https://juejin.cn/post/6844903871500795912
 - Resume: https://zhuanlan.zhihu.com/p/362447316
 - JCSprout：https://github.com/crossoverJie/JCSprout
+- https://zyue.wiki/link
+- https://github.com/justauth/JustAuth
+- https://github.com/xkcoding/spring-boot-demo.git
