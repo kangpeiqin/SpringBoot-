@@ -3,6 +3,7 @@
 <div>
   <li><a href="./type/前缀树.md">前缀树</a> </li>
   <li><a href="./type/动态规划.md">动态规划</a> </li>
+  <li><a href="./type/链表.md">链表</a> </li>
 </div>
 
 ## [整数](#整数)
