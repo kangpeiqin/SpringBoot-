@@ -30,8 +30,8 @@ let array: Array<number> = [1, 1, 2, 3, 5]; //数组泛型
 ```
 - 函数声明&表达式
 ```typescript
-//声明
-function sum(x: number, y: number): number {
+//声明，可选参数
+function sum(x: number, y: number,lastName?: string): number {
     return x + y;
 }
 //表达式
@@ -39,9 +39,10 @@ let mySum: (x: number, y: number) => number = function (x: number, y: number): n
     return x + y;
 };
 ```
-
 - 类型断言
 > 手动指定一个值的类型。
+- 声明文件
+> 当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码补全、接口提示等功能。
 
 ### 工程
 #### 代码检查(使用 ESLint)
