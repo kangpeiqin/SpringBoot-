@@ -7,15 +7,14 @@
 #### :cloud: 笔记整理
 
 <div>
-  <li><a href="./notes/Java基础.md">Java基础</a> </li>
+  <li><a href="./notes/Java基础.md">Java 基础</a> </li>
   <li><a href="./notes/数据库.md">数据库</a></li>
   <li><a href="./notes/designPattern.md">设计模式</a></li>
   <li><a href="./notes/Redis.md">Redis</a></li>
-  <li><a href="./notes/JVM.md">Java虚拟机</a></li>
+  <li><a href="./notes/JVM.md">Java 虚拟机</a></li>
   <li><a href="./notes/framework.md">常用框架</a></li>
   <li><a href="./notes/数据结构&算法.md">算法</a></li>
   <li><a href="./notes/操作系统.md">操作系统</a></li>
-  <li><a href="./notes/分布式.md">分布式</a></li>
   <li><a href="./notes/分布式.md">分布式</a></li>
   <li><a href="./notes/消息队列.md">消息队列</a></li>
   <li><a href="./notes/计算机网络.md">计算机网络</a></li>
