@@ -93,6 +93,10 @@ const Hello = ({ name, age }) => {
 ## JSX
 在底层，React 组件实际上返回的 JSX 会被编译成 JavaScript。
 # React Native
+React Native 是一种利用JavaScript 和React 开发原生Android 和iOS应用的框架。它提供了一系列跨平台的组件，从而解耦了特定平台的原生组件。
 ## 创建应用
+> Expo 是一个简化了React Native 应用的安装、开发、构建以及部署的平台
+
 ## 核心组件
-Core components 是一系列由React Native 提供的组件，底层是利用平台的原生组件
+一系列由React Native 提供的组件，底层是利用平台的原生组件
+> Text、View、TextInput、Pressable
