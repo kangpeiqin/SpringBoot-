@@ -1,3 +1,4 @@
+# React
 ## 创建 React 应用
 > 使用 create-react-app 创建
 ```shell
@@ -91,4 +92,7 @@ const Hello = ({ name, age }) => {
 > 复杂状态
 ## JSX
 在底层，React 组件实际上返回的 JSX 会被编译成 JavaScript。
-
+# React Native
+## 创建应用
+## 核心组件
+Core components 是一系列由React Native 提供的组件，底层是利用平台的原生组件
