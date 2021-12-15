@@ -95,8 +95,8 @@ const Hello = ({ name, age }) => {
 # React Native
 React Native 是一种利用JavaScript 和React 开发原生Android 和iOS应用的框架。它提供了一系列跨平台的组件，从而解耦了特定平台的原生组件。
 ## 创建应用
-> Expo 是一个简化了React Native 应用的安装、开发、构建以及部署的平台
-
+> - Expo 是一个简化了React Native 应用的安装、开发、构建以及部署的平台
+> - Yarn是 Facebook 提供的替代 npm 的工具，可以加速 node 模块的下载
 ## 核心组件
-一系列由React Native 提供的组件，底层是利用平台的原生组件
+一系列由 React Native 提供的组件，底层是利用平台的原生组件
 > Text、View、TextInput、Pressable
