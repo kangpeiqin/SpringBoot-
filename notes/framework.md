@@ -3,7 +3,22 @@
 ## Spring
 
 ## Spring Boot
-### 自动配置的原理
+### 基础
+- 组件装配(类的实例化)的几种方式
+> - 使用@Component注解
+> - 配置类@Configuration与@Bean
+> - 使用模块装配@EnableXXX与@Import(要注册较多的Bean可使用这个方式)
+> - @ComponentScan：
+> 从定义的扫描包路径(默认是SpringBoot主配置所在的包及其子包)扫描标识了@Controller、@Service、@Repository、@Component注解的类到Spring容器中
+- 其他注解
+> @Conditional
+```text
+若容器中没有这个则容器会给你注入一个这样的视图解析器，若容器中有就不注入了
+@Bean
+@ConditionalOnMissingBean
+```
+### 自动装配
+类似Java的SPI、`Dubbo`的SPI机制，SpringBoot也提供了一种机制，它通过读取`META-INF/spring.factories`文件（这些文件可能存在于类路径中的多个jar包中）来加载一些预先配置的类，而这个核心机制来源于`SpringFactoriesLoader`。
 
 ## Security
 ### Spring Security

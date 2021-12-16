@@ -4,8 +4,8 @@
 [String](#String) &nbsp;
 [ArrayList](#ArrayList) &nbsp;[LinkedList](#LinkedList) &nbsp; [HashMap](#HashMap)
 ### String
-> String类也是不可变类，即对象一旦创建，就没有办法修改了。String类也声明为了final，不能被继承，内部char数组value也是final的，初始化后就不能再变了。
-- 用字符数组表示字符串，String中的大部分方法内部也都是操作的这个字符数组
+不可变类，即对象一旦创建，就没有办法修改了。类声明为final，不能被继承，内部char数组value也是final的，初始化后就不能再变了。
+- 用字符数组表示字符串，大部分方法内部也都是操作的这个字符数组
 ```text
 //使用 final 进行修饰，表示常量，不可变，在对象初始化(构造函数里面)时进行赋值
 private final char value[];
@@ -15,7 +15,7 @@ public String(String original) {
     this.hash = original.hash;
 }
 ```
-> `length()`方法返回的是这个数组的长度，`indexOf()`查找字符串是在这个数组中进行查找。
+> `length()`方法返回的是这个内部数组的长度，`indexOf()`查找字符串是在这个数组中进行查找。
 - 常量字符串
 > String类型的对象，在内存中，它们被放在一个共享的地方：字符串常量池，
 它保存所有的常量字符串，每个常量只会保存一份，被所有使用者共享
