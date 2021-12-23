@@ -20,5 +20,6 @@
   <li><a href="./notes/消息队列.md">消息队列</a></li>
   <li><a href="./notes/计算机网络.md">计算机网络</a></li>
   <li><a href="./notes/Linux.md">Linux</a></li>
+  <li><a href="./notes/Q&A.md">Q&A</a></li>
   <li><a href="./notes/Go语言.md">Go语言</a></li>
 </div>

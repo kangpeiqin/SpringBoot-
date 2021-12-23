@@ -19,6 +19,8 @@
 ```
 ### 自动装配
 类似Java的SPI、`Dubbo`的SPI机制，SpringBoot也提供了一种机制，它通过读取`META-INF/spring.factories`文件（这些文件可能存在于类路径中的多个jar包中）来加载一些预先配置的类，而这个核心机制来源于`SpringFactoriesLoader`。
+### 启动流程
+- SpringApplication实例的初始化
 
 ## Security
 ### Spring Security
