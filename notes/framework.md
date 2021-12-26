@@ -1,6 +1,22 @@
 <p> <a href="../README.md">返回首页</a></p>
 
 ## Spring
+### Bean 的作用域
+- singleton: 单例模式
+> 当`spring`创建`IoC`容器的时，会欲初始化所有的该作用域实例，加上`lazy-init`就可以避免预处理
+- prototype：原型模式(多例)
+> 每次通过getBean获取该bean就会新产生一个实例，创建后spring将不再对其管理
+- request
+> 每次请求都新产生一个新的实例
+- session: 
+> 每次会话都会产生一个新的实例
+- global session
+### 循环依赖
+
+### Q&A
+- `Controller`是单例还是多例？
+> 默认是单例的，不要使用非静态的成员变量，否则会发生数据逻辑混乱。
+使用`@Scope("prototype")`可声明为多例。
 
 ## Spring Boot
 ### 基础
