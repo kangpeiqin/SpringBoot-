@@ -37,7 +37,23 @@
 类似Java的SPI、`Dubbo`的SPI机制，SpringBoot也提供了一种机制，它通过读取`META-INF/spring.factories`文件（这些文件可能存在于类路径中的多个jar包中）来加载一些预先配置的类，而这个核心机制来源于`SpringFactoriesLoader`。
 ### 启动流程
 - SpringApplication实例的初始化
-
+### 日志
+Spring Boot在所有**内部日志**中使用Commons Logging，但是默认配置也提供了对常用日志的支持。
+> 默认情况下，Spring Boot会用Logback来记录日志，并用INFO级别输出到控制台。
+> - SLF4J(Simple Logging Facade For Java)，它是一个针对于各类Java日志框架的统一Facade抽象。而真正的日志实现则是在运行时决定的——它提供了各类日志框架的绑定。
+> - Logback是log4j框架的作者开发的新一代日志框架，它效率更高、能够适应诸多的运行环境
+- 日志级别
+> `ERROR、WARN、INFO、DEBUG、TRACE`。日志级别从低到高分为`TRACE < DEBUG < INFO < WARN < ERROR < FATAL`，如果设置为`WARN`，则低于WARN的信息都不会输出。
+- 将日志信息存储到文件
+> 在本机环境，我们习惯在控制台看日志，但是线上我们还是要通过将日志信息保存到日志文件中，查询日志文件即可。
+> - 设置logging.file或logging.path(文件夹生成一个日志文件)属性。
+- 自定义日志配置
+> 命名规则：Logback：logback-spring.xml, logback.xml, logback.groovy。官方推荐优先使用带有-spring的文件名作为你的日志配置。
+- 针对不同运行时`Profile`使用不同的日志配置
+> logging.config=classpath:logging-config.xml
+### 异步调用
+通常我们开发的程序都是同步调用的，即程序按照代码的顺序一行一行的逐步往下执行，每一行代码都必须等待上一行代码执行完毕才能开始执行。而异步编程则没有这个限制，代码的调用不再是阻塞的。
+> 默认情况下的异步线程池配置使得线程不能被重用，每次调用异步方法都会新建一个线程，我们可以自己定义异步线程池来优化。
 ## Security
 ### Spring Security
 - 基础原理：https://blog.csdn.net/u012702547/article/details/89629415
