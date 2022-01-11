@@ -427,6 +427,7 @@ class Solution {
 ```
 ### 合并两个有序链表
 [21.合并两个有序链表](https://leetcode-cn.com/problems/merge-two-sorted-lists/)
+> Java 题解：
 ```java
 class Solution {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
@@ -450,6 +451,26 @@ class Solution {
         return dummy.next;
     }
 }
+```
+> python 题解：
+```python
+class Solution:
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        dummy = ListNode()
+        p = dummy
+        while list1 and list2:
+            if list1.val < list2.val:
+                p.next = list1
+                list1 = list1.next
+            else:
+                p.next = list2
+                list2 = list2.next
+            p = p.next
+        if list1:
+            p.next = list1
+        if list2:
+            p.next = list2
+        return dummy.next
 ```
 ### 括号生成
 [22.括号生成](https://leetcode-cn.com/problems/generate-parentheses/)
@@ -508,6 +529,44 @@ class Solution {
         }
         tail.next = p == null ? q : p;
         return head.next;
+    }
+}
+```
+> 在合并两个链表的基础上进行扩展
+```java
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists.length == 0){
+            return null;
+        }
+        if(lists.length == 1){
+            return lists[0];
+        }
+        ListNode list = lists[0];
+        for(int i = 1;i < lists.length; i++){
+            list = mergeTwoLists(list,lists[i]);
+        }
+        return list;
+    }
+    private ListNode mergeTwoLists(ListNode l1,ListNode l2){
+        ListNode dummy = new ListNode(0),p = dummy;
+        while(l1 != null && l2 != null){
+            if(l1.val < l2.val){
+                p.next = l1;
+                l1 = l1.next;
+            }else{
+                p.next = l2;
+                l2 = l2.next;
+            }
+            p = p.next;
+        }
+        if(l1 != null){
+            p.next = l1;
+        }
+        if(l2 != null){
+            p.next = l2;
+        }
+        return dummy.next;
     }
 }
 ```
