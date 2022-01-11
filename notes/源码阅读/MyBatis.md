@@ -102,3 +102,6 @@ MyBatis通过MappedStatement描述<select|update|insert|delete>或者@Select、@
 > Mapper由两部分组成，分别为Mapper接口和通过注解或者XML文件配置的SQL语句
 ### Mapper接口中定义方法是如何被执行的？
 Mapper接口用于定义执行SQL语句相关的方法，方法名一般和Mapper XML配置文件中<select|update|delete|insert>标签的id属性相同，接口的完全限定名一般对应Mapper XML配置文件的命名空间。
+## Q&A
+- 所有的`XML`在程序启动时是如何被加载和解析进内存的？
+> 读取配置文件信息-->将配置文件信息解析进内存

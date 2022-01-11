@@ -26,6 +26,7 @@
 - [在排序数组中查找元素的第一个和最后一个位置](#在排序数组中查找元素的第一个和最后一个位置)
 - [搜索插入位置](#搜索插入位置)
 - [全排列](#全排列)
+- [子集](#子集)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -831,6 +832,63 @@ class Solution {
                 path.removeLast();
                 visit[i] = false;
             }
+        }
+    }
+}
+```
+> 决策的过程，画出决策树，每一步进行选择或者不选
+```java
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+         List<List<Integer>> res = new ArrayList<>();
+         backtrack(res, new LinkedList<>(), 0, nums);
+         return res;
+    }
+            //回溯法：深度遍历
+    private void backtrack(List<List<Integer>> res, LinkedList<Integer> path, int index, int[] nums) {
+        if (path.size() == nums.length) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+            //对每个元素进行深度遍历
+        for (int i = 0; i < nums.length; i++) {
+            if (!path.contains(nums[i])) {
+                path.add(nums[i]);
+                //递归，下一层的选择
+                backtrack(res, path, i, nums);
+                //回溯
+                path.removeLast();
+            }
+        }
+    }
+}
+```
+### 子集
+[78,子集](https://leetcode-cn.com/problems/subsets/)
+```java
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        res.add(new ArrayList<>());
+        for (int i = 1; i <= nums.length; i++) {
+            backtrack(res, new LinkedList<>(), i, 0, nums);
+        }
+        return res;
+    }
+
+        //回溯法：深度遍历
+    private void backtrack(List<List<Integer>> res, LinkedList<Integer> path, int depth, int index, int[] nums) {
+        if (path.size() == depth) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        //对每个元素进行深度遍历
+        for (int i = index; i < nums.length; i++) {
+            path.add(nums[i]);
+            //递归
+            backtrack(res, path, depth, i + 1, nums);
+            //回溯
+            path.removeLast();
         }
     }
 }
