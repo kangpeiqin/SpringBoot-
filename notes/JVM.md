@@ -54,4 +54,8 @@ Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为
 - `jhat`(JVM Heap Analysis Tool)：虚拟机堆转储快照分析工具
 - `jstack`(Stack Trace for Java): 命令用于生成虚拟机当前时刻的线程快照
 
+## 参考链接：
+- https://github.com/doocs/jvm
+
+
 
