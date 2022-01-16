@@ -13,4 +13,5 @@
   <li><a href="./type/搜索与回溯算法.md">搜索与回溯算法</a> </li>
   <li><a href="./type/查找算法.md">查找算法</a> </li>
   <li><a href="./type/栈与队列.md">栈与队列</a> </li>
+  <li><a href="./type/位运算.md">位运算</a> </li>
 </div>
