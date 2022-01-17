@@ -27,6 +27,10 @@
 - [搜索插入位置](#搜索插入位置)
 - [全排列](#全排列)
 - [子集](#子集)
+- [汉明距离](#汉明距离)
+- [只出现一次的数字](#只出现一次的数字)
+- [丢失的数字](#丢失的数字)
+- [只出现一次的数字III](#只出现一次的数字III)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -875,8 +879,7 @@ class Solution {
         }
         return res;
     }
-
-        //回溯法：深度遍历
+    //回溯法：深度遍历
     private void backtrack(List<List<Integer>> res, LinkedList<Integer> path, int depth, int index, int[] nums) {
         if (path.size() == depth) {
             res.add(new ArrayList<>(path));
@@ -890,6 +893,79 @@ class Solution {
             //回溯
             path.removeLast();
         }
+    }
+}
+```
+> 位运算
+### 汉明距离
+[461.汉明距离](https://leetcode-cn.com/problems/hamming-distance/)
+> 亦或求解之后，结果`(z)`进行循环按位与`(z&(z-1))`运算求得最终结果
+```java
+class Solution {
+    public int hammingDistance(int x, int y) {
+        //亦或求解
+        int z = x ^ y;
+        int cnt = 0;
+        while (z != 0) {
+            cnt++;
+            z &= (z - 1);
+        }
+        return cnt;
+    }
+}
+```
+### 只出现一次的数字
+[136.只出现一次的数字](https://leetcode-cn.com/problems/single-number/)
+> 亦或：x^x = 0(相同为0)，y^0 = y(不同为1)
+```java
+class Solution {
+    public int singleNumber(int[] nums) {
+        int ans = 0;
+        for (int num : nums) {
+            ans ^= num;
+        }
+        return ans;
+    }
+}
+```
+### 丢失的数字
+[268.丢失的数字](https://leetcode-cn.com/problems/missing-number/)
+> 同上题的思路：nums = [3,0,1] ^ [0 1 2 3] ==> 得到最终结果 2
+```java
+class Solution {
+    public int missingNumber(int[] nums) {
+        int ans = 0;
+        for (int i = 0; i < nums.length; i++) {
+            ans = ans ^ i ^ nums[i];
+        }
+        //还缺少一个的一个数:num.length
+        return ans ^ nums.length;
+    }
+}
+```
+### 只出现一次的数字III
+[260.只出现一次的数字III](https://leetcode-cn.com/problems/single-number-iii/)
+> 如何进行分组问题，亦或求解
+```java
+class Solution {
+    public int[] singleNumber(int[] nums) {
+        int x = 0, y = 0, z = 0, m = 1;
+        for (int num : nums) {
+            z ^= num;
+        }
+        //找到首个二进制位位1的位置，等于0说明还没找到，需要继续找
+        while ((z & m) == 0) {
+            m <<= 1;
+        }
+        //分组
+        for (int num : nums) {
+            if ((m & num) == 0) {
+                x ^= num;
+            } else {
+                y ^= num;
+            }
+        }
+        return new int[]{x, y};
     }
 }
 ```
