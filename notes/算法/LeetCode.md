@@ -31,6 +31,7 @@
 - [只出现一次的数字](#只出现一次的数字)
 - [丢失的数字](#丢失的数字)
 - [只出现一次的数字III](#只出现一次的数字III)
+- [二叉树的最大深度](#二叉树的最大深度)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -966,6 +967,35 @@ class Solution {
             }
         }
         return new int[]{x, y};
+    }
+}
+```
+### 二叉树的最大深度
+[二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
+> 广度优先遍历：逐层遍历
+```java
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int ans = 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            while (size-- > 0) {
+                TreeNode node = queue.poll();
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+            ans++;
+        }
+        return ans;
     }
 }
 ```
