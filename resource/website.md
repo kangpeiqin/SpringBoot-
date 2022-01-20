@@ -17,6 +17,9 @@
 - 番茄创意：http://www.geektomato.com/i/q61t5p6p
 - 流程图绘制：https://app.diagrams.net/
 - SpringBoot in Action: https://github.com/hansonwang99/Spring-Boot-In-Action/
+- Java-Interview：https://github.com/gzc426/Java-Interview
+- free-project-course：https://github.com/resumejob/free-project-course
+- awesome-java：https://github.com/CodingDocs/awesome-java
 ## 文章
 [十年设计工作的一些思考](https://mp.weixin.qq.com/s/AwL8y5uSBVuLIVg9RkSqmw)
 - 时间带来的危机感
