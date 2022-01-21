@@ -21,22 +21,25 @@ Spring通过提前曝光机制，利用三级缓存解决循环依赖问题。
 使用`@Scope("prototype")`可声明为多例。
 
 ## Spring Boot
+> `SpringBoot`中推荐基于`Java Config`的方式来代替传统的XML方式去引入`Bean`
 ### 基础
 - 组件装配(类的实例化)的几种方式
-> - 使用@Component注解
-> - 配置类@Configuration与@Bean
-> - 使用模块装配@EnableXXX与@Import(要注册较多的Bean可使用这个方式)
-> - @ComponentScan：
+> - 使用`@Component`注解
+> - 配置类`@Configuration`与`@Bean`
+> - 使用模块装配`@EnableXXX`与`@Import`(要注册较多的Bean可使用这个方式)
+> - `@ComponentScan`：
 > 从定义的扫描包路径(默认是SpringBoot主配置所在的包及其子包)扫描标识了@Controller、@Service、@Repository、@Component注解的类到Spring容器中
 - 其他注解
-> @Conditional
+> `@Conditional`: 根据条件进行注入
 ```text
-若容器中没有这个则容器会给你注入一个这样的视图解析器，若容器中有就不注入了
+若容器中没有这个`Bean`则容器会给你注入一个这样的视图解析器，若容器中有就不注入了
 @Bean
 @ConditionalOnMissingBean
 ```
 ### 自动装配
-类似Java的SPI、`Dubbo`的SPI机制，SpringBoot也提供了一种机制，它通过读取`META-INF/spring.factories`文件（这些文件可能存在于类路径中的多个jar包中）来加载一些预先配置的类，而这个核心机制来源于`SpringFactoriesLoader`。
+> 是什么？主要的原理是什么？如何实现？
+- 概念和原理
+> SpringBoot提供了一种机制，它通过读取`META-INF/spring.factories`文件（这些文件可能存在于类路径中的多个jar包中）来加载一些预先配置的类，而这个核心机制来源于`SpringFactoriesLoader`。
 ### 启动流程
 - SpringApplication实例的初始化
 ### 日志
@@ -73,3 +76,8 @@ Spring Boot在所有**内部日志**中使用Commons Logging，但是默认配�
 
 
 ## Spring Cloud
+
+
+
+## 文章推荐
+- [SpringBoot 配置类解析](https://mp.weixin.qq.com/s/NvPO5-FWLiOlrsOf4wLaJA)
