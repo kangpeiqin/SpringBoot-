@@ -32,6 +32,7 @@
 - [丢失的数字](#丢失的数字)
 - [只出现一次的数字III](#只出现一次的数字III)
 - [二叉树的最大深度](#二叉树的最大深度)
+- [奇偶链表](#奇偶链表)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -996,6 +997,37 @@ class Solution {
             ans++;
         }
         return ans;
+    }
+}
+```
+### 奇偶链表
+[328.奇偶链表](https://leetcode-cn.com/problems/odd-even-linked-list/)
+> 拆分成奇偶链表，然后进行合并
+```java
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+        //奇数
+        ListNode odd = new ListNode(0), p = odd;
+        //偶数
+        ListNode even = new ListNode(0), q = even;
+        int cnt = 0;
+        while (head != null) {
+            if (cnt % 2 == 0) {
+                q.next = head;
+                q = q.next;
+            } else {
+                p.next = head;
+                p = p.next;
+            }
+            cnt++;
+            head = head.next;
+        }
+        if (even.next != null && odd.next != null) {
+            q.next = odd.next;
+        }
+        //最后的结点置为空
+        p.next = null;
+        return even.next;
     }
 }
 ```

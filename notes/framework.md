@@ -14,6 +14,8 @@
 ### 循环依赖
 BeanA对象的创建依赖于BeanB，BeanB对象的创建也依赖于BeanA，这就造成了死循环，如果不做处理的话会造成栈溢出。
 Spring通过提前曝光机制，利用三级缓存解决循环依赖问题。
+### `@Transactional`实现原理
+
 
 ### Q&A
 - `Controller`是单例还是多例？
@@ -36,7 +38,7 @@ Spring通过提前曝光机制，利用三级缓存解决循环依赖问题。
 @Bean
 @ConditionalOnMissingBean
 ```
-### 自动装配
+### 自动配置
 > 是什么？主要的原理是什么？如何实现？
 - 概念和原理
 > SpringBoot提供了一种机制，它通过读取`META-INF/spring.factories`文件（这些文件可能存在于类路径中的多个jar包中）来加载一些预先配置的类，而这个核心机制来源于`SpringFactoriesLoader`。
