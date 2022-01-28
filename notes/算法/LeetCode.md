@@ -33,6 +33,9 @@
 - [只出现一次的数字III](#只出现一次的数字III)
 - [二叉树的最大深度](#二叉树的最大深度)
 - [奇偶链表](#奇偶链表)
+- [分隔链表](#分隔链表)
+- [回文链表](#回文链表)
+- [链表反转](#链表反转)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1000,6 +1003,8 @@ class Solution {
     }
 }
 ```
+--------
+> 链表
 ### 奇偶链表
 [328.奇偶链表](https://leetcode-cn.com/problems/odd-even-linked-list/)
 > 拆分成奇偶链表，然后进行合并
@@ -1031,3 +1036,124 @@ class Solution {
     }
 }
 ```
+### 分隔链表
+[725.分隔链表](https://leetcode-cn.com/problems/split-linked-list-in-parts/)
+> 计算每段的长度，分割链表(结点最后一个置为空)
+```java
+class Solution {
+    public ListNode[] splitListToParts(ListNode head, int k) {
+        //结果集
+        ListNode[] res = new ListNode[k];
+        if (head == null) {
+            return res;
+        }
+        //链表的长度
+        int n = 0;
+        ListNode p = head;
+        while (p != null) {
+            n++;
+            p = p.next;
+        }
+        int mod = n % k, avg = n / k, index = 0;
+        //接下来的步骤卡住了，什么原因？认真分析结果
+        for (int i = 0; i < k; i++) {
+            //每个部分的长度
+            int size = avg + ((mod-- > 0) ? 1 : 0);
+            //每个部分起始点
+            res[i] = head;
+            while (size-- > 0) {
+                if (size == 0) {
+                    p = head;
+                    head = head.next;
+                    //尾部结点置为空
+                    p.next = null;
+                    continue;
+                }
+                head = head.next;
+            }
+        }
+        return res;
+    }
+}
+```
+### 回文链表
+> 找到中间结点 + 后半段进行反转
+[234.回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)
+```java
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+        int n = 0;
+        ListNode p = head, q = head;
+        while (p != null) {
+            n++;
+            p = p.next;
+        }
+        int mid = n / 2;
+        //找到中间结点,中间结点也会被反转
+        while (mid-- > 0) {
+            if (mid == 0) {
+                ListNode tail = q;
+                q = q.next;
+                tail.next = null;
+                continue;
+            }
+            q = q.next;
+        }
+        return isPalindrome(head, reverse(q));
+    }
+
+    private boolean isPalindrome(ListNode head, ListNode reverse) {
+        while (reverse != null && head != null) {
+            if (head.val != reverse.val) {
+                return false;
+            }
+            head = head.next;
+            reverse = reverse.next;
+        }
+        return true;
+    }
+
+    private ListNode reverse(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(0), p = head.next, q;
+        dummy.next = head;
+        head.next = null;
+        while (p != null) {
+            //用结点 q 保存 p 当前结点
+            q = p;
+            p = p.next;
+            q.next = dummy.next;
+            dummy.next = q;
+        }
+        return dummy.next;
+    }
+}
+```
+### 链表反转
+[206.反转链表](https://leetcode-cn.com/problems/reverse-linked-list/description/)
+> 遍历链表，不断往头部重新链接结点
+```java
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(0), p = head.next, q;
+        dummy.next = head;
+        head.next = null;
+        while (p != null) {
+            q = p;
+            p = p.next;
+            q.next = dummy.next;
+            dummy.next = q;
+        }
+        return dummy.next;
+    }
+}
+```
+---
