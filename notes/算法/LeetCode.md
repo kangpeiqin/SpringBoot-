@@ -1077,8 +1077,8 @@ class Solution {
 }
 ```
 ### 回文链表
-> 找到中间结点 + 后半段进行反转
 [234.回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)
+> 找到中间结点 + 后半段进行反转
 ```java
 class Solution {
     public boolean isPalindrome(ListNode head) {
@@ -1151,6 +1151,30 @@ class Solution {
             p = p.next;
             q.next = dummy.next;
             dummy.next = q;
+        }
+        return dummy.next;
+    }
+}
+```
+### 两两交换链表中的节点
+X [24.两两交换链表中的节点](https://leetcode-cn.com/problems/swap-nodes-in-pairs/description/)
+> 虚拟头结点+前置指针进行遍历
+```java
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        //虚拟头结点
+        ListNode dummy = new ListNode(0), prev = dummy;
+        dummy.next = head;
+        while (prev.next != null && prev.next.next != null) {
+            //相邻结点进行两两交换
+            ListNode l1 = prev.next, l2 = prev.next.next, next = l2.next;
+            l1.next = next;
+            l2.next = l1;
+            prev.next = l2;
+            prev = l1;
         }
         return dummy.next;
     }
