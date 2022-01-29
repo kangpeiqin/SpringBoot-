@@ -36,6 +36,8 @@
 - [分隔链表](#分隔链表)
 - [回文链表](#回文链表)
 - [链表反转](#链表反转)
+- [相交链表](#相交链表)
+- [两数相加II](#两数相加II)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1169,6 +1171,80 @@ class Solution {
         dummy.next = head;
         head.next = null;
         while (p != null) {
+            q = p;
+            p = p.next;
+            q.next = dummy.next;
+            dummy.next = q;
+        }
+        return dummy.next;
+    }
+}
+```
+### 相交链表
+[160.相交链表](https://leetcode-cn.com/problems/intersection-of-two-linked-lists/)
+> 交叉遍历
+```java
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode p = headA, q = headB;
+        while(p != q){
+            p = p == null ? headB : p.next;
+            q = q == null ? headA : q.next;
+        }
+        return p;
+    }
+}
+```
+### 两数相加II
+[445. 两数相加 II](https://leetcode-cn.com/problems/add-two-numbers-ii/)
+```java
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+       if(l1 == null || l2 == null){
+           return l1 == null ? l2 : l1;
+       }
+       ListNode node = sum(reverse(l1),reverse(l2));
+       return reverse(node);
+    }
+    private ListNode sum(ListNode l1,ListNode l2){
+        ListNode dummy = new ListNode(),p = dummy;
+        int carry = 0;
+        while(l1 != null && l2 != null){
+            int sum = carry + l1.val + l2.val;
+            carry = sum/10;
+            p.next = new ListNode(sum % 10);
+            p = p.next;
+            l1 = l1.next;
+            l2 = l2.next;
+        }
+        while(l1 != null){
+            int sum = carry + l1.val;
+            carry = sum / 10;
+            p.next = new ListNode(sum % 10);
+            l1 = l1.next;
+            p = p.next;
+        }
+        while(l2 != null){
+            int sum = carry + l2.val;
+            carry = sum / 10;
+            p.next = new ListNode(sum % 10);
+            l2 = l2.next;
+            p = p.next;
+        }
+        if(carry != 0){
+            p.next = new ListNode(carry);
+        }
+        return dummy.next;
+    }
+    private ListNode reverse(ListNode head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        ListNode dummy = new ListNode(),p = head.next,q;
+        dummy.next = head;
+        head.next = null;
+        //记得使用 while 语句
+        while(p != null){
             q = p;
             p = p.next;
             q.next = dummy.next;
