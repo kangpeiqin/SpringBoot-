@@ -20,3 +20,43 @@ Error:(350, 51) java: 找不到符号   符号:   变量 CoroutinesUtils
 > 别名注册接口，定义对别名的简单增删等操作
 
 ## `SpringMVC` 源码阅读
+
+## SpringBoot
+### 自动配置原理解析
+```
+//在启动时，使用`@EnableXXX`与`@Import`注册bean。
+// EnableAutoConfiguration 注解
+@Import(AutoConfigurationImportSelector.class)
+@Import(AutoConfigurationPackages.Registrar.class)
+// AutoConfigurationImportSelector 类实现 ImportSelector 接口
+//大批量的bean注册：这里主要会从 spring.factories 文件中读取配置好的一些类
+@Override
+public String[] selectImports(AnnotationMetadata annotationMetadata) {
+	if (!isEnabled(annotationMetadata)) {
+		return NO_IMPORTS;
+	}
+	AutoConfigurationEntry autoConfigurationEntry = getAutoConfigurationEntry(annotationMetadata);
+	return StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());
+}
+protected AutoConfigurationEntry getAutoConfigurationEntry(AnnotationMetadata annotationMetadata) {
+	if (!isEnabled(annotationMetadata)) {
+		return EMPTY_ENTRY;
+	}
+	AnnotationAttributes attributes = getAttributes(annotationMetadata);
+	List<String> configurations = getCandidateConfigurations(annotationMetadata, attributes);
+	configurations = removeDuplicates(configurations);
+	Set<String> exclusions = getExclusions(annotationMetadata, attributes);
+	checkExcludedClasses(configurations, exclusions);
+	configurations.removeAll(exclusions);
+	configurations = getConfigurationClassFilter().filter(configurations);
+	fireAutoConfigurationImportEvents(configurations, exclusions);
+	return new AutoConfigurationEntry(configurations, exclusions);
+}
+protected List<String> getCandidateConfigurations(AnnotationMetadata metadata, AnnotationAttributes attributes) {
+	List<String> configurations = SpringFactoriesLoader.loadFactoryNames(getSpringFactoriesLoaderFactoryClass(),
+			getBeanClassLoader());
+	Assert.notEmpty(configurations, "No auto configuration classes found in META-INF/spring.factories. If you "
+			+ "are using a custom packaging, make sure that file is correct.");
+	return configurations;
+}
+```

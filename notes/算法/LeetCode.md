@@ -38,6 +38,10 @@
 - [链表反转](#链表反转)
 - [相交链表](#相交链表)
 - [两数相加II](#两数相加II)
+- [两数之和II](#两数之和II)
+- [平方数之和](#平方数之和)
+- [反转字符串中的元音字母](#反转字符串中的元音字母)
+- [验证回文字符串Ⅱ](#验证回文字符串Ⅱ)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1027,6 +1031,7 @@ class Solution {
     }
 }
 ```
+-----
 --------
 > 链表
 ### 奇偶链表
@@ -1254,4 +1259,143 @@ class Solution {
     }
 }
 ```
+> 使用栈进行解决
+```java
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode();
+        Stack<Integer> s1 = buildStack(l1);
+        Stack<Integer> s2 = buildStack(l2);
+        int carry = 0;
+        while(!s1.isEmpty() || !s2.isEmpty() || carry != 0){
+            int x = s1.isEmpty()?0:s1.pop();
+            int y = s2.isEmpty()?0:s2.pop();
+            int sum = x + y + carry;
+            ListNode node = new ListNode(sum%10);
+            node.next = dummy.next;
+            dummy.next = node;
+            carry = sum/10;           
+        }
+        return dummy.next;
+    }
+    private Stack<Integer> buildStack(ListNode head){
+        Stack<Integer> stack = new Stack<>();
+        while(head != null){
+            stack.add(head.val);
+            head = head.next;
+        }
+        return stack;
+    }
+}
+```
+---
+---
+> 双指针
+### 两数之和II
+[167.两数之和 II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/)
+> 有序数组，可以使用二分查找
+```java
+class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int low = 0,high = numbers.length - 1;
+        while(low <= high){
+            int sum = numbers[low] + numbers[high];
+            if(sum == target){
+                return new int[]{low+1,high+1};
+            }else if(sum < target){
+                low++;
+            }else{
+                high--;
+            }
+        }
+        return new int[]{};
+    }
+}
+```
+### 平方数之和
+[633.平方数之和](https://leetcode-cn.com/problems/sum-of-square-numbers/)
+> 可能会发生溢出，需要使用 long 型
+```java
+class Solution {
+    public boolean judgeSquareSum(int c) {
+        long high = (long)Math.sqrt(c)+1;
+        long low = 0;
+        while(low <= high){
+            long sum = low*low + high*high;
+            if(sum == c){
+                return true;
+            }else if(sum < c){
+                low++;
+            }else{
+                high--;
+            }
+        }
+        return false;
+    }
+}
+```
+### 反转字符串中的元音字母
+[反转字符串中的元音字母](https://leetcode-cn.com/problems/reverse-vowels-of-a-string/)
+```java
+class Solution {
+    public String reverseVowels(String s) {
+        Set<Character> set = new HashSet<>();
+        set.addAll(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+        int low = 0, high = s.length() - 1;
+        char[] arr = s.toCharArray();
+        while (low <= high) {
+            // arr[low]/arr[high] 出现多次，可以使用变量提取出来。
+            if (set.contains(Character.toLowerCase(arr[low]))
+                    && set.contains(Character.toLowerCase(arr[high]))) {
+                char c = arr[low];
+                arr[low] = arr[high];
+                arr[high] = c;
+                low++;
+                high--;
+            } else if (set.contains(Character.toLowerCase(arr[low]))) {
+                high--;
+            } else if (set.contains(Character.toLowerCase(arr[high]))) {
+                low++;
+            } else {
+                low++;
+                high--;
+            }
+        }
+        // 可以直接简化成 return new String(arr);
+        StringBuilder sb = new StringBuilder();
+        for (char c : arr) {
+            sb.append(c);
+        }
+        return sb.toString();
+    }
+}
+```
+### 验证回文字符串Ⅱ
+[验证回文字符串 Ⅱ](https://leetcode-cn.com/problems/valid-palindrome-ii/)
+> 如果两边出现了不相等的情况，则对中间的字符串进行检查
+```java
+class Solution {
+    public boolean validPalindrome(String s) {
+        int low = 0,high = s.length()-1;
+        while(low <= high){
+            if(s.charAt(low) != s.charAt(high)){
+                return validPalindrome(s,low+1,high) || validPalindrome(s,low,high-1);
+            };
+            //条件要写在这边，不能写在if当中
+            low++;
+            high--;
+        }
+        return true;
+    }
+    private boolean validPalindrome(String s,int left,int right){
+        while(left < right){
+            if(s.charAt(left++) != s.charAt(right--)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
+---
 ---
