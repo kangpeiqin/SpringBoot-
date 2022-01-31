@@ -1397,5 +1397,26 @@ class Solution {
     }
 }
 ```
+### 环形链表
+[环形链表](https://leetcode-cn.com/problems/linked-list-cycle/)
+> 快慢指针
+```java
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        if(head == null || head.next == null){
+            return false;
+        }
+        ListNode p = head,q = head.next;
+        while(p != null && q != null && q.next != null){
+            if(p == q){
+                return true;
+            }
+            p = p.next;
+            q = q.next.next;
+        }
+        return false;
+    }
+}
+```
 ---
 ---
