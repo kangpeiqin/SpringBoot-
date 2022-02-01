@@ -42,6 +42,7 @@
 - [平方数之和](#平方数之和)
 - [反转字符串中的元音字母](#反转字符串中的元音字母)
 - [验证回文字符串Ⅱ](#验证回文字符串Ⅱ)
+- [通过删除字母匹配到字典里最长单词](#通过删除字母匹配到字典里最长单词)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1415,6 +1416,38 @@ public class Solution {
             q = q.next.next;
         }
         return false;
+    }
+}
+```
+### 通过删除字母匹配到字典里最长单词
+[524.通过删除字母匹配到字典里最长单词](https://leetcode-cn.com/problems/longest-word-in-dictionary-through-deleting/)
+> 利用双指针判断字串
+```java
+class Solution {
+    public String findLongestWord(String s, List<String> dictionary) {
+        String ans = "";
+        for(String target:dictionary){
+            int l1 = s.length(),l2 = target.length(),l3 = ans.length();
+            //将不符合的情况进行排除
+            if(l1 < l2 || l2 < l3 || (l2 == l3 && target.compareTo(ans) > 0)){
+                continue;
+            }
+            if(isSubStr(s,target)){
+                ans = target;
+            }
+        }
+        return ans;
+    }
+    private boolean isSubStr(String s,String target){
+        int i = 0,j = 0;
+        while(i < s.length() && j < target.length()){
+            //不匹配则 s 串继续向前查找
+            if(s.charAt(i) == target.charAt(j)){
+                j++;
+            }
+            i++;
+        }
+        return j == target.length();
     }
 }
 ```
