@@ -32,17 +32,20 @@
 - [丢失的数字](#丢失的数字)
 - [只出现一次的数字III](#只出现一次的数字III)
 - [二叉树的最大深度](#二叉树的最大深度)
+## [链表](#链表)
 - [奇偶链表](#奇偶链表)
 - [分隔链表](#分隔链表)
 - [回文链表](#回文链表)
 - [链表反转](#链表反转)
 - [相交链表](#相交链表)
 - [两数相加II](#两数相加II)
+## [双指针](#双指针)
 - [两数之和II](#两数之和II)
 - [平方数之和](#平方数之和)
 - [反转字符串中的元音字母](#反转字符串中的元音字母)
 - [验证回文字符串Ⅱ](#验证回文字符串Ⅱ)
 - [通过删除字母匹配到字典里最长单词](#通过删除字母匹配到字典里最长单词)
+- [合并两个有序数组](#合并两个有序数组)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1034,7 +1037,7 @@ class Solution {
 ```
 -----
 --------
-> 链表
+## 链表
 ### 奇偶链表
 [328.奇偶链表](https://leetcode-cn.com/problems/odd-even-linked-list/)
 > 拆分成奇偶链表，然后进行合并
@@ -1291,7 +1294,7 @@ class Solution {
 ```
 ---
 ---
-> 双指针
+## 双指针
 ### 两数之和II
 [167.两数之和 II - 输入有序数组](https://leetcode-cn.com/problems/two-sum-ii-input-array-is-sorted/)
 > 有序数组，可以使用二分查找
@@ -1448,6 +1451,26 @@ class Solution {
             i++;
         }
         return j == target.length();
+    }
+}
+```
+### 合并两个有序数组
+[合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/)
+> 从尾部进行遍历，然后合并
+```java
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int index = m + n - 1,i = m - 1, j = n - 1;
+        while(i >= 0 && j >= 0){
+            if(nums1[i] >= nums2[j]){
+                nums1[index--] = nums1[i--]; 
+            }else{
+                nums1[index--] = nums2[j--];
+            }
+        }
+        while(j >= 0){
+            nums1[index--] = nums2[j--];
+        }
     }
 }
 ```
