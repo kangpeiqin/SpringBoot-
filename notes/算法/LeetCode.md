@@ -31,7 +31,6 @@
 - [只出现一次的数字](#只出现一次的数字)
 - [丢失的数字](#丢失的数字)
 - [只出现一次的数字III](#只出现一次的数字III)
-- [二叉树的最大深度](#二叉树的最大深度)
 ## [链表](#链表)
 - [奇偶链表](#奇偶链表)
 - [分隔链表](#分隔链表)
@@ -46,6 +45,8 @@
 - [验证回文字符串Ⅱ](#验证回文字符串Ⅱ)
 - [通过删除字母匹配到字典里最长单词](#通过删除字母匹配到字典里最长单词)
 - [合并两个有序数组](#合并两个有序数组)
+## [树](#树)
+- [二叉树的最大深度](#二叉树的最大深度)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1006,6 +1007,9 @@ class Solution {
     }
 }
 ```
+---
+---
+## 树
 ### 二叉树的最大深度
 [二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/)
 > 广度优先遍历：逐层遍历
@@ -1032,6 +1036,17 @@ class Solution {
             ans++;
         }
         return ans;
+    }
+}
+```
+> 深度优先，递归算法
+```java
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
     }
 }
 ```
@@ -1455,7 +1470,7 @@ class Solution {
 }
 ```
 ### 合并两个有序数组
-[合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/)
+[88.合并两个有序数组](https://leetcode-cn.com/problems/merge-sorted-array/)
 > 从尾部进行遍历，然后合并
 ```java
 class Solution {
