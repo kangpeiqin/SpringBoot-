@@ -50,7 +50,8 @@
 - [平衡二叉树](#平衡二叉树)
 - [二叉树的直径](#二叉树的直径)
 - [翻转二叉树](#翻转二叉树)
-
+- [合并二叉树](#合并二叉树)
+- [路径总和](#路径总和)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1111,6 +1112,41 @@ class Solution {
         root.left = invertTree(root.right);
         root.right = invertTree(temp);
         return root;   
+    }
+}
+```
+### 合并二叉树
+[617. 合并二叉树](https://leetcode-cn.com/problems/merge-two-binary-trees/)
+> 两个结点都不为空，则创建新的结点，并进行递归遍历
+```java
+class Solution {
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+        if(root1 == null && root2 == null){
+            return null;
+        }
+        if(root1 == null || root2 == null){
+            return root1 == null ? root2: root1;
+        }
+        TreeNode node = new TreeNode(root1.val+root2.val);
+        node.left = mergeTrees(root1.left,root2.left);
+        node.right = mergeTrees(root1.right,root2.right);
+        return node;
+    }
+}
+```
+### 路径总和
+[112.路径总和](https://leetcode-cn.com/problems/path-sum/)
+> 换种思路：分解进行求解，判断目标值与当前遍历结点值是否相等
+```java
+class Solution {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if(root == null){
+            return false;
+        }
+        if(root.left == null && root.right == null && root.val == targetSum){
+            return true;
+        }
+        return hasPathSum(root.left,targetSum-root.val)|| hasPathSum(root.right,targetSum-root.val);
     }
 }
 ```
