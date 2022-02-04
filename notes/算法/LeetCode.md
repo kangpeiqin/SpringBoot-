@@ -48,6 +48,9 @@
 ## [树](#树)
 - [二叉树的最大深度](#二叉树的最大深度)
 - [平衡二叉树](#平衡二叉树)
+- [二叉树的直径](#二叉树的直径)
+- [翻转二叉树](#翻转二叉树)
+
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1071,6 +1074,43 @@ class Solution {
             result = false;
         }
         return Math.max(l,r)+1;
+    }
+}
+```
+### 二叉树的直径
+[543.二叉树的直径](https://leetcode-cn.com/problems/diameter-of-binary-tree/)
+> 左子树的高度 + 右子树的高度
+```java
+class Solution {
+    int max = 0;
+    public int diameterOfBinaryTree(TreeNode root) {
+        getDepth(root);
+        return max;
+    }
+    private int getDepth(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int l = getDepth(root.left);
+        int r = getDepth(root.right);
+        max = Math.max(max,(l+r));
+        return Math.max(l,r)+1;
+    }
+}
+```
+### 翻转二叉树
+[226.翻转二叉树](https://leetcode-cn.com/problems/invert-binary-tree/)
+> 临时结点+递归翻转
+```java
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null){
+            return null;
+        }
+        TreeNode temp = root.left;
+        root.left = invertTree(root.right);
+        root.right = invertTree(temp);
+        return root;   
     }
 }
 ```
