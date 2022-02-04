@@ -47,6 +47,7 @@
 - [合并两个有序数组](#合并两个有序数组)
 ## [树](#树)
 - [二叉树的最大深度](#二叉树的最大深度)
+- [平衡二叉树](#平衡二叉树)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1047,6 +1048,29 @@ class Solution {
             return 0;
         }
         return Math.max(maxDepth(root.left),maxDepth(root.right))+1;
+    }
+}
+```
+### 平衡二叉树
+[110. 平衡二叉树](https://leetcode-cn.com/problems/balanced-binary-tree/)
+> 计算最大深度+判断不符合情况的条件
+```java
+class Solution {
+    private boolean result = true;
+    public boolean isBalanced(TreeNode root) {
+        getMaxDepth(root);
+        return result;
+    }
+    private int getMaxDepth(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int l = getMaxDepth(root.left);
+        int r = getMaxDepth(root.right);
+        if(Math.abs(l-r) > 1){
+            result = false;
+        }
+        return Math.max(l,r)+1;
     }
 }
 ```
