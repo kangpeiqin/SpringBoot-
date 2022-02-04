@@ -54,6 +54,7 @@
 - [路径总和](#路径总和)
 - [路径总和III](#路径总和III)
 - [二叉搜索树的最近公共祖先](#二叉搜索树的最近公共祖先)
+- [二叉树的最近公共祖先](#二叉树的最近公共祖先)
 
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
@@ -1197,6 +1198,22 @@ class Solution {
             return lowestCommonAncestor(root.right,p,q);
         }
         return root;
+    }
+}
+```
+###  二叉树的最近公共祖先
+[236.二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/)
+> 根据 p , q 结点所在的位置进行求解
+```java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        //p 或者 q 刚好有一个时根结点，则返回根结点
+        if(root == null || root == p || root == q){
+            return root;
+        }
+        TreeNode left = lowestCommonAncestor(root.left,p,q);
+        TreeNode right = lowestCommonAncestor(root.right,p,q);
+        return left == null ? right: right == null ? left: root;
     }
 }
 ```
