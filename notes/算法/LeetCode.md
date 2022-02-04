@@ -53,6 +53,7 @@
 - [合并二叉树](#合并二叉树)
 - [路径总和](#路径总和)
 - [路径总和III](#路径总和III)
+- [二叉搜索树的最近公共祖先](#二叉搜索树的最近公共祖先)
 
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
@@ -1175,6 +1176,27 @@ class Solution {
         }  
         ans += startWithRoot(root.left,targetSum-root.val)+startWithRoot(root.right,targetSum-root.val);
         return ans;
+    }
+}
+```
+### 二叉搜索树的最近公共祖先
+[235.二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
+> 根据二叉搜索树 左边<= 中间 <= 右边 进行求解
+```java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null){
+            return null;
+        }
+        //向左边进行搜索
+        if(root.val > p.val && root.val > q.val){
+            return lowestCommonAncestor(root.left,p,q);
+        }
+        //往右边进行搜索
+        if(root.val < p.val && root.val < q.val){
+            return lowestCommonAncestor(root.right,p,q);
+        }
+        return root;
     }
 }
 ```
