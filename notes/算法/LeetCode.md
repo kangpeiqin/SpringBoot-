@@ -52,6 +52,8 @@
 - [翻转二叉树](#翻转二叉树)
 - [合并二叉树](#合并二叉树)
 - [路径总和](#路径总和)
+- [路径总和III](#路径总和III)
+
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1147,6 +1149,32 @@ class Solution {
             return true;
         }
         return hasPathSum(root.left,targetSum-root.val)|| hasPathSum(root.right,targetSum-root.val);
+    }
+}
+```
+### 路径总和III
+X[437.路径总和 III](https://leetcode-cn.com/problems/path-sum-iii/)
+> 深度递归遍历
+```java
+class Solution {
+    public int pathSum(TreeNode root, int targetSum) {
+        if(root == null){
+            return 0;
+        }
+        int ans = startWithRoot(root,targetSum) + pathSum(root.left,targetSum) + pathSum(root.right,targetSum);
+        return ans;
+    }
+    //从某个结点开始进行遍历，可以找到符合要求的值
+    private int startWithRoot(TreeNode root,int targetSum){
+        if(root == null){
+            return 0;
+        }
+        int ans = 0;
+        if(root.val == targetSum){
+            ans++;
+        }  
+        ans += startWithRoot(root.left,targetSum-root.val)+startWithRoot(root.right,targetSum-root.val);
+        return ans;
     }
 }
 ```
