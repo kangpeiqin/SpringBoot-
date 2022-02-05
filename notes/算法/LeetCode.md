@@ -53,6 +53,8 @@
 - [合并二叉树](#合并二叉树)
 - [路径总和](#路径总和)
 - [路径总和III](#路径总和III)
+- [二叉搜索树的最近公共祖先](#二叉搜索树的最近公共祖先)
+- [二叉树的最近公共祖先](#二叉树的最近公共祖先)
 - [左叶子之和](#左叶子之和)
 
 ### 两数之和
@@ -1176,30 +1178,6 @@ class Solution {
         }  
         ans += startWithRoot(root.left,targetSum-root.val)+startWithRoot(root.right,targetSum-root.val);
         return ans;
-    }
-}
-```
-### 左叶子之和
-[404. 左叶子之和](https://leetcode-cn.com/problems/sum-of-left-leaves/)
-> 叶子节点判断，左叶子节点判断并计算求和
-```java
-class Solution {
-    public int sumOfLeftLeaves(TreeNode root) {
-        if(root == null){
-            return 0;
-        }
-        //判断是否为叶子节点，并计算和
-        if(isLeaf(root.left)){
-            return root.left.val + sumOfLeftLeaves(root.right);
-        }
-        return sumOfLeftLeaves(root.left)+sumOfLeftLeaves(root.right);
-    }
-    //判断是否为叶子节点
-    private boolean isLeaf(TreeNode root){
-        if(root == null){
-            return false;
-        }
-        return root.left == null && root.right == null;
     }
 }
 ```
