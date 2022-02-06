@@ -1181,6 +1181,44 @@ class Solution {
     }
 }
 ```
+### 二叉搜索树的最近公共祖先
+[235.二叉搜索树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-search-tree/description/)
+> 根据二叉搜索树的特点进行递归求解
+```java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+       if(root.val > p.val && root.val > q.val){
+           return lowestCommonAncestor(root.left,p,q);
+       }
+       if(root.val < p.val && root.val < q.val){
+           return lowestCommonAncestor(root.right,p,q);
+       }
+       return root;
+    }
+}
+```
+### 二叉树的最近公共祖先
+[236.二叉树的最近公共祖先](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/submissions/)
+> 深度优先遍历，判断公共结点在根结点的哪一侧，分情况进行判断
+```java
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null || root == p || root == q){
+            return root;
+        }
+        //判断公共节点在那一侧
+        TreeNode left = lowestCommonAncestor(root.left,p,q);
+        TreeNode right = lowestCommonAncestor(root.right,p,q);
+        if(left == null){
+            return right;
+        }
+        if(right == null){
+            return left;
+        }
+        return root;
+    }
+}
+```
 ### 左叶子之和
 [404.左叶子之和](https://leetcode-cn.com/problems/sum-of-left-leaves/description/)
 > 深度优先遍历
