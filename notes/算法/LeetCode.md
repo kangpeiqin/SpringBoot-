@@ -1181,6 +1181,59 @@ class Solution {
     }
 }
 ```
+### 左叶子之和
+[404.左叶子之和](https://leetcode-cn.com/problems/sum-of-left-leaves/description/)
+> 深度优先遍历
+```java
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        if(isLeaf(root.left)){
+            return root.left.val + sumOfLeftLeaves(root.right);
+        }
+        return sumOfLeftLeaves(root.left)+sumOfLeftLeaves(root.right);
+    }
+    private boolean isLeaf(TreeNode root){
+        if(root == null){
+            return false;
+        }
+        return root.left == null && root.right == null;
+    }
+}
+```
+> 广度优先遍历
+```java
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+       if(root == null){
+           return 0;
+       }
+       int ans = 0;
+       Queue<TreeNode> q = new LinkedList<>();
+       q.add(root);
+       while(!q.isEmpty()){
+           TreeNode node = q.poll();
+           if(node.left != null && isLeaf(node.left)){
+               ans += node.left.val;
+           }
+           if(node.left != null){
+               q.add(node.left);
+           }
+           if(node.right != null){
+               q.add(node.right);
+           }
+       }
+       return ans;
+    }
+    
+    private boolean isLeaf(TreeNode root){
+        return root.left == null && root.right == null;
+    }
+}
+```
+
 -----
 --------
 ## 链表
