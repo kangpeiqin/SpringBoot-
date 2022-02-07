@@ -25,7 +25,7 @@ Error:(350, 51) java: 找不到符号   符号:   变量 CoroutinesUtils
 ### 自动配置原理解析
 ```
 //在启动时，使用`@EnableXXX`与`@Import`注册bean。
-// EnableAutoConfiguration 注解
+// EnableAutoConfiguration 注解，使用 @Import 注解往容器中注册相应的bean
 @Import(AutoConfigurationImportSelector.class)
 @Import(AutoConfigurationPackages.Registrar.class)
 // AutoConfigurationImportSelector 类实现 ImportSelector 接口
@@ -60,3 +60,4 @@ protected List<String> getCandidateConfigurations(AnnotationMetadata metadata, A
 	return configurations;
 }
 ```
+### 声明式事务的原理
