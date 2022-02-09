@@ -56,7 +56,9 @@
 - [验证回文字符串Ⅱ](#验证回文字符串Ⅱ)
 - [通过删除字母匹配到字典里最长单词](#通过删除字母匹配到字典里最长单词)
 - [合并两个有序数组](#合并两个有序数组)
- 
+## [排序](#排序)
+- [数组中的第K个最大元素](#数组中的第K个最大元素)
+
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1708,6 +1710,19 @@ class Solution {
         while(j >= 0){
             nums1[index--] = nums2[j--];
         }
+    }
+}
+```
+---
+---
+## 排序
+### 数组中的第K个最大元素
+[215.数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)
+```java
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+        Arrays.sort(nums);
+        return nums[nums.length-k];
     }
 }
 ```
