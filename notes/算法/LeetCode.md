@@ -58,6 +58,9 @@
 - [合并两个有序数组](#合并两个有序数组)
 ## [排序](#排序)
 - [数组中的第K个最大元素](#数组中的第K个最大元素)
+- [前K个高频元素](#前K个高频元素)
+- [根据字符出现频率排序](#根据字符出现频率排序)
+- [颜色分类](颜色分类)
 
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
@@ -1726,5 +1729,63 @@ class Solution {
     }
 }
 ```
+### 前K个高频元素
+[347.前 K 个高频元素](https://leetcode-cn.com/problems/top-k-frequent-elements/)
+> 使用 Map 对元素出现的频率进行统计，然后使用优先队列将 Map 当中的键值对进行排序
+```java
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        //创建一个优先队列并确定排序规则
+        PriorityQueue<Map.Entry<Integer, Integer>> queue = new PriorityQueue<>((e1, e2) -> e2.getValue() - e1.getValue());
+        //将所有的数据都加入到队列当中
+        queue.addAll(map.entrySet());
+        int[] ans = new int[k];
+        for (int i = 0; i < k; ++i) {
+            ans[i] = queue.poll().getKey();
+        }
+        return ans;
+    }
+}
+```
+### 根据字符出现频率排序
+[451. 根据字符出现频率排序](https://leetcode-cn.com/problems/sort-characters-by-frequency/)
+> 和上题的逻辑一致，采用 map 统计出现频率 + 优先队列进行排序
+```java
+class Solution {
+    public String frequencySort(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        char[] arr = s.toCharArray();
+        for (char c : arr) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+        PriorityQueue<Map.Entry<Character, Integer>> queue = new PriorityQueue<>((e1, e2) -> e2.getValue() - e1.getValue());
+        queue.addAll(map.entrySet());
+        StringBuilder sb = new StringBuilder();
+        while (!queue.isEmpty()) {
+            Map.Entry<Character, Integer> entry = queue.poll();
+            char c = entry.getKey();
+            for (int i = 0; i < entry.getValue(); i++) {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
+}
+```
+### 颜色分类
+[75.颜色分类](https://leetcode-cn.com/problems/sort-colors/)
+> 使用 Java 提供的 API
+```java
+class Solution {
+    public void sortColors(int[] nums) {
+        Arrays.sort(nums);
+    }
+}
+```
+
 ---
 ---
