@@ -61,6 +61,7 @@
 - [前K个高频元素](#前K个高频元素)
 - [根据字符出现频率排序](#根据字符出现频率排序)
 - [颜色分类](#颜色分类)
+## [贪心算法](#贪心算法)
 
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
@@ -1783,6 +1784,26 @@ class Solution {
 class Solution {
     public void sortColors(int[] nums) {
         Arrays.sort(nums);
+    }
+}
+```
+## 贪心算法
+> 保证每次操作都是局部最优，最后得到的结果是全局最优。
+### 分发饼干
+[455.分发饼干](https://leetcode-cn.com/problems/assign-cookies/description/)
+```java
+class Solution {
+    public int findContentChildren(int[] g, int[] s) {
+        Arrays.sort(g);
+        Arrays.sort(s);
+        int gi = 0,si = 0;
+        while(gi < g.length && si < s.length){
+            if(g[gi] <= s[si]){
+                gi++;
+            }
+            si++;
+        }
+        return gi;
     }
 }
 ```
