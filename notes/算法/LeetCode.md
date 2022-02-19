@@ -62,7 +62,9 @@
 - [根据字符出现频率排序](#根据字符出现频率排序)
 - [颜色分类](#颜色分类)
 ## [贪心算法](#贪心算法)
-
+- [分发饼干](#分发饼干)
+## [字符串](#字符串)
+- [翻转字符串里的单词](#翻转字符串里的单词)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1787,6 +1789,8 @@ class Solution {
     }
 }
 ```
+---
+---
 ## 贪心算法
 > 保证每次操作都是局部最优，最后得到的结果是全局最优。
 ### 分发饼干
@@ -1804,6 +1808,36 @@ class Solution {
             si++;
         }
         return gi;
+    }
+}
+```
+## 字符串
+### 翻转字符串里的单词
+[151.翻转字符串里的单词](https://leetcode-cn.com/problems/reverse-words-in-a-string/)
+```java
+class Solution {
+    public String reverseWords(String s) {
+        s = s.trim();
+        String[] arr = s.split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for(int i = arr.length - 1; i >= 0 ;i--){
+            sb.append(arr[i]);
+            if(i != 0){
+                sb.append(" ");
+            }
+        }
+        return sb.toString();
+    }
+}
+```
+> 简便写法
+```java
+class Solution {
+    public String reverseWords(String s) {
+        s = s.trim();
+        List<String> list = Arrays.asList(s.split("\\s+"));
+        Collections.reverse(list);
+        return String.join(" ",list);
     }
 }
 ```
