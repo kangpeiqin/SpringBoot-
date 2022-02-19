@@ -65,6 +65,7 @@
 - [分发饼干](#分发饼干)
 ## [字符串](#字符串)
 - [翻转字符串里的单词](#翻转字符串里的单词)
+- [有效的字母异位词](有效的字母异位词)
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1838,6 +1839,29 @@ class Solution {
         List<String> list = Arrays.asList(s.split("\\s+"));
         Collections.reverse(list);
         return String.join(" ",list);
+    }
+}
+```
+### 有效的字母异位词
+[242.有效的字母异位词](https://leetcode-cn.com/problems/valid-anagram/)
+> 使用数组进行映射
+```java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length() != t.length()){
+            return false;
+        }
+        int[] cnt = new int[26];
+        for(int i = 0; i < s.length();i++){
+            cnt[s.charAt(i) - 'a']++;
+            cnt[t.charAt(i) - 'a']--;
+        }
+        for(int i: cnt){
+            if(i != 0){
+                return false;
+            }
+        }
+        return true;
     }
 }
 ```
