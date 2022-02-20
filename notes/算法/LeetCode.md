@@ -65,7 +65,10 @@
 - [分发饼干](#分发饼干)
 ## [字符串](#字符串)
 - [翻转字符串里的单词](#翻转字符串里的单词)
-- [有效的字母异位词](有效的字母异位词)
+- [有效的字母异位词](#有效的字母异位词)
+- [计数二进制子串](#计数二进制子串)
+
+
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
 > 思路：采用哈希表进行求解
@@ -1862,6 +1865,28 @@ class Solution {
             }
         }
         return true;
+    }
+}
+```
+### 计数二进制子串
+[696.计数二进制子串](https://leetcode-cn.com/problems/count-binary-substrings/)
+```java
+class Solution {
+    public int countBinarySubstrings(String s) {
+        int preLen = 0,curLen = 1,count = 0;
+        for(int i=1; i<s.length(); i++){
+            if(s.charAt(i) == s.charAt(i-1)){
+                curLen++;
+            }else{
+                //之前遍历到的相同元素个数
+                preLen = curLen;
+                curLen = 1;
+            }
+            if(preLen >= curLen){
+                count++;
+            }
+        }
+        return count;
     }
 }
 ```
