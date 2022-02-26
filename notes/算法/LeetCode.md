@@ -67,7 +67,9 @@
 - [翻转字符串里的单词](#翻转字符串里的单词)
 - [有效的字母异位词](#有效的字母异位词)
 - [计数二进制子串](#计数二进制子串)
-
+- [回文子串](#回文子串)
+- [同构字符串](#同构字符串)
+- [最长回文串](#最长回文串)
 
 ### 两数之和
 [1. 两数之和](https://leetcode-cn.com/problems/two-sum/)
@@ -1887,6 +1889,81 @@ class Solution {
             }
         }
         return count;
+    }
+}
+```
+### 回文子串
+[647. 回文子串](https://leetcode-cn.com/problems/palindromic-substrings/description/)
+> 找出所有子串串逐一判断是否为回文串
+```java
+class Solution {
+    public int countSubstrings(String s) {
+        int cnt = 0;
+        for(int i = 0; i < s.length();i++){
+            for(int j = i; j < s.length();j++){
+                String subStr = s.substring(i,j+1);
+                if(isPalindrome(subStr)){
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
+    }
+    private boolean isPalindrome(String s){
+        if(s.length() == 1){
+            return true;
+        }
+        int i = 0, j = s.length() - 1;
+        while(i <= j){
+            if(s.charAt(i++) != s.charAt(j--)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
+### 同构字符串
+[205.同构字符串](https://leetcode-cn.com/problems/isomorphic-strings/description/)
+> 字符串映射：如 a -> b，使用数组将 s 和 t 当中的字符映射到同一个数字，也可以使用哈希表进行求解
+```java
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        //使用位置作为映射
+        int[] indexOfs = new int[256];
+        int[] indexOft = new int[256];
+        for(int i = 0; i < s.length();i++){
+           char sc = s.charAt(i);
+           char tc = t.charAt(i);
+           if(indexOfs[sc] != indexOft[tc]){
+               return false;
+           }
+           indexOfs[sc]  = i+1;
+           indexOft[tc] = i+1;
+        }
+        return true;
+    }
+}
+```
+### 最长回文串
+[409.最长回文串](https://leetcode-cn.com/problems/longest-palindrome/)
+> 使用数组进行映射存储字符出现的频率
+```java
+class Solution {
+    public int longestPalindrome(String s) {
+        int ans = 0;
+        int[] cnt = new int[256];
+        char[] arr = s.toCharArray();
+        for(char c : arr){
+            cnt[c]++;
+        }
+        for(int i : cnt){
+            ans += i/2*2;
+        }
+        if(ans < s.length()){
+            ans++;
+        }
+        return ans;
     }
 }
 ```
