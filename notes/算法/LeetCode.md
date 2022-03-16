@@ -63,6 +63,7 @@
 - [颜色分类](#颜色分类)
 ## [贪心算法](#贪心算法)
 - [分发饼干](#分发饼干)
+- [无重叠区间](#无重叠区间)
 ## [字符串](#字符串)
 - [翻转字符串里的单词](#翻转字符串里的单词)
 - [有效的字母异位词](#有效的字母异位词)
@@ -1814,6 +1815,29 @@ class Solution {
             si++;
         }
         return gi;
+    }
+}
+```
+### 无重叠区间
+X[435.无重叠区间](https://leetcode-cn.com/problems/non-overlapping-intervals/description/)
+```java
+class Solution {
+    public int eraseOverlapIntervals(int[][] intervals) {
+        if(intervals.length == 0){
+            return 0;
+        }
+        //按照第二个数字的大小进行排序:,[1,2],[1,3],[2,3],[3,4]
+        Arrays.sort(intervals,Comparator.comparing(o->o[1]));
+        int cnt = 1;
+        int end = intervals[0][1];
+        for(int[] interval : intervals){
+            if(interval[0] < end){
+                continue;
+            }
+            end = interval[1];
+            cnt++;
+        }
+        return intervals.length - cnt;
     }
 }
 ```
