@@ -64,6 +64,7 @@
 ## [贪心算法](#贪心算法)
 - [分发饼干](#分发饼干)
 - [无重叠区间](#无重叠区间)
+- [划分字母区间](#划分字母区间)
 ## [字符串](#字符串)
 - [翻转字符串里的单词](#翻转字符串里的单词)
 - [有效的字母异位词](#有效的字母异位词)
@@ -1838,6 +1839,35 @@ class Solution {
             cnt++;
         }
         return intervals.length - cnt;
+    }
+}
+```
+### 划分字母区间
+[763.划分字母区间](https://leetcode-cn.com/problems/partition-labels/) 
+```java
+class Solution {
+    public List<Integer> partitionLabels(String s) {
+        int[] lastIndexOfChar = new int[26];
+        for(int i = 0;i < s.length();i++){
+            lastIndexOfChar[charToIndex(s.charAt(i))] = i;
+        }
+        int firstIndex = 0;
+        List<Integer> indexList = new ArrayList<>(16);
+        while(firstIndex < s.length()){
+            int lastIndex = firstIndex;
+            for(int i = firstIndex; i < s.length() && i <= lastIndex;i++){
+                int index = lastIndexOfChar[charToIndex(s.charAt(i))];
+                if(index > lastIndex){
+                    lastIndex = index;
+                }
+            }
+            indexList.add(lastIndex - firstIndex + 1);
+            firstIndex = lastIndex + 1;
+        }
+        return indexList;
+    }
+    private int charToIndex(char c){
+        return c - 'a';
     }
 }
 ```
