@@ -61,3 +61,9 @@ protected List<String> getCandidateConfigurations(AnnotationMetadata metadata, A
 }
 ```
 ### 声明式事务的原理
+### Spring Cache
+```text
+注解：EnableCaching 默认适用 JDK 动态代理
+通过：@Import(CachingConfigurationSelector.class) 将 AutoProxyRegistrar 和 ProxyCachingConfiguration 加载进 IoC 容器当中
+
+```
