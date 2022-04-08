@@ -59,13 +59,20 @@ ls /usr/bin | tee ls.txt | grep zip
 # locate：通过快速搜索数据库，更新数据库：updatedb
 locate zip | grep bin
 # locate 查找文件仅仅是依据文件名，而 find 程序则是依据文件的各种属性在既定的目录（及其子目录）里查找 
-# ~ 下目录总量
+# ~ 中目录总量
 find ~ -type d | wc -l
 ```
 ## 归档和备份
-压缩：分为有损(JPEG、MP3)/无损压缩
+压缩：分为有损(JPEG、MP3)/无损压缩。**归档是一个聚集众多文件并将它们组合为一个大文件的过程。**
 ```bash
-
+# gzip 命令用于压缩一个或者多个文件，执行命令后，源文件会被压缩文件取代
+gzip/gunzip output.txt
+# tar(tape archive) 归档文件可以由许多独立的文件、一个或多个目录层次或者两者的混合组合而成
+tar -czvf foo.tar.gz foo.txt # 打包并压缩
+tar -xzvf foo.tar.gz # 解压
+# zip 打包压缩工具
+zip foo.zip foo.txt
+unzip foo.zip
 ```
 ## 网络
 - 网络检测、监测
@@ -79,20 +86,31 @@ netstat -ie
 ```bash
 # 用于文件下载的命令行程序：wget，可以用于从网站上下载内容也可以用于从FTP站点下载，单个文件、多个文件甚至整个网站都可以被下载。
 wget www.baidu.com
-
+# scp(secure copy)：从远程主机复制文件
+scp remote-sys:document.txt .
 ```
 ## 软件包管理
 在系统上安装、维护软件的方法。主要的两种方式：`Debian`的`.deb`技术和`Red Hat`的`.rpm`技术。
-
+软件包管理系统通常包含两类工具——执行如安装、删除软件包文件等任务的低级工具(`dpkg`、`rpm`)和进行元数据搜索及提供依赖性解决的高级工具(`apt-get`、`yum`)。
+```bash
+# 安装、更新、卸载
+yum install/update/erase
+# 列出已经安装的软件包列表
+rpm -qa
+```
 ## 进程
 通过快速切换运行中的程序来实现多任务的同时执行。
 ```bash
-# 进程信息查看：ps
-# 动态查看进程信息：top
+# 进程信息查看
+ps -aux
+# 动态查看进程信息
+top
 ```
-## shell 脚本
 ## 存储介质
-
+- 挂载、卸载存储设备
+> 管理存储设备首先要做的就是将该设备添加到文件系统树中，从而允许操作系统可以操作该设备，这个过程称之为挂载。
+## shell 脚本
+## 环境（environment）
 
 ## 参考：
 - https://www.runoob.com/linux/linux-vim.html
