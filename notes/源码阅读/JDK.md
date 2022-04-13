@@ -25,7 +25,7 @@ public String(String original) {
 它保存所有的常量字符串，每个常量只会保存一份，被所有使用者共享
 ### `StringBuilder` & `StringBuffer`
 StringBuffer类是线程安全的，而StringBuilder类不是。
-> 没有采用 `final` 进行修饰，可以进行修改，同，字符数组中不一定所有位置都已经被使用。
+> 没有采用 `final` 进行修饰，可以进行修改，字符数组中不一定所有位置都已经被使用。
 ```text
 //The value is used for character storage.
 char[] value;
