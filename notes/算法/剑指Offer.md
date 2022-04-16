@@ -15,4 +15,5 @@
   <li><a href="./type/栈与队列.md">栈与队列</a> </li>
   <li><a href="./type/位运算.md">位运算</a> </li>
   <li><a href="./type/树.md">树</a></li>
+  <li><a href="./type/其他.md">其他</a></li>
 </div>
