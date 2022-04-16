@@ -26,24 +26,61 @@
 # webpack 是核心模块，webpack-cli则是命令行模块
 npm install webpack webpack-cli --save-dev 
 ```
-### 资源打包
-- 通过命令
+### 模块打包
 ```bash
 #  npx 会自动查找当前依赖包中的可执行文件，如果找不到，就会去 PATH 里找。如果依然找不到，就会帮你安装
 # entry：资源打包的入口，webpack 从这里开始进行模块依赖的查找，得到项目中包含的js模块，并通过它们来生成最终的产物。
 # output-filename：打包输出资源名，boundle.js 就是 Webpack 的打包结果
 # mode：打包模式(developement\production\none)，会自动添加适合当前模式的一系列配置
-npx webpack --entry=./index.js --output-filename=boundle.js --mode=development
+npx webpack --entry=./index.js --output-filename=bundle.js --mode=development
 ```
 - 使用 `npm scripts`
 > 可以在 `package.json` 中添加脚本命令，简化命令
 ```bash
 # scripts 是 npm 提供的脚本功能，我们可以直接使用由模块所添加的指令。
   "scripts": {
-    "build": "webpack --entry=./index.js --output-filename=boundle.js --mode=development"
+    "build": "webpack --entry=./index.js --output-filename=bundle.js --mode=development"
   }
 # 执行 yarn run build 便可以进行构建
+# webpack 默认的源代码入口是`src/index.js`,因此可以省略 `entry` 的配置
+# 命令行查看帮助文档
+npx webpack -h
 ```
+#### 使用配置文件
+当项目需要越来越多的配置时，就要往命令中添加更多的参数，到后期维护就相当困难，所以可以把这些参数改为对象的形式专门放在一个
+配置文件当中，在`Webpack`每次打包的时候读取该配置文件即可。`Webpack`的默认配置文件为`webpack.config.js`,当然，也可以使用其他
+文件名，需要使用命令行参数制定。如下所示：
+```
+//webpack.config.js 文件
+//使用 module.exports 导出了一个对象，打包时被 webpack 接收的对象
+module.exports = {
+    //资源输入属性
+    entry: './src/index.js',
+    //资源输出属性
+    output:{
+        filename: 'bundle.js'
+    },
+    mode: 'development'
+}
+//package.json 中的配置
+"scripts": {
+    "build": "webpack"
+}
+```
+#### 模块标准
+- `CommonJS`
+> 09 年提出的包含模块、文件、IO、控制台在内的一些列标准。进行变量及函数声明时不会污染全局环境。
+会形成一个属于模块自身的作用域。
+- 通过 `module.exports` 可以导出模块中的内容
+> `CommonJS` 模块内部会有一个`module`对象用于存放当前模块的信息
+- 通过 `require` 函数进行模块导入
+```
+模块时第一次被加载，则会首先执行该模块，然后导出内容。
+
+
+```
+- `ES6 Module`
+
 ### Q&A
 - 为什么需要模块化？
 > 应用功能和规模大了之后，需要按照更好的组织方式，将特定的功能拆分多个文件，方便后续的维护。
