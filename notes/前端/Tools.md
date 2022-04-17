@@ -69,15 +69,25 @@ module.exports = {
 > 09 年提出的包含模块、文件、IO、控制台在内的一些列标准。进行变量及函数声明时不会污染全局环境。
 会形成一个属于模块自身的作用域。
 - 通过 `module.exports` 可以导出模块中的内容
-> `CommonJS` 模块内部会有一个`module`对象用于存放当前模块的信息
+> `CommonJS` 模块内部会有一个`module`对象用于存放当前模块的信息。模块依赖关系的建立发生在代码运行阶段。
+```
+//导出一个对象
+module.exports = {
+    name: 'calc',
+    add: function () {
+        document.write('hello world');
+    }
+} 
+```
 - 通过 `require` 函数进行模块导入
 ```
-模块时第一次被加载，则会首先执行该模块，然后导出内容。
-
-
+//导入模块
+const calc = require("./add-content.js");
+// 使用函数
+calc.add();
 ```
 - `ES6 Module`
-
+> 模块依赖关系的建立发生在代码编译阶段。
 ### Q&A
 - 为什么需要模块化？
 > 应用功能和规模大了之后，需要按照更好的组织方式，将特定的功能拆分多个文件，方便后续的维护。

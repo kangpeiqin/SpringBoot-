@@ -14,6 +14,8 @@
 ## 程序结构
 ### 声明
 变量、常量、类型和函数实体对象的声明：var、const、type、func
+## `goroutine`和`channel`
+`goroutine`可以让程序同时处理几个不同的任务。
 
 ## 资源
 - [Go 语言圣经](http://shouce.jb51.net/gopl-zh/ch1/ch1-01.html)
