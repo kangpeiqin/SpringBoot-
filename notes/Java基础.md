@@ -154,23 +154,26 @@ JMM定义了线程和主内存之间的抽象关系：**线程之间的共享变
 @Retention为RetentionPolicy.RUNTIME的注解，可以利用反射机制在运行时进行查看和利用这些信息。
 - Class、Field、Method、Constructor类中都有获取注解(getAnnotations、getParameterAnnotations)、判断是否具有指定注解(isAnnotationPresent)的方法
 ## 类加载
-类加载器ClassLoader就是加载其他类的类，它负责将字节码文件加载到内存，创建Class对象
+类加载器`ClassLoader`就是加载其他类的类，它负责将字节码文件加载到内存，创建Class对象。
+> 每个Class对象都有一个方法(`getClassLoader()`)，可以获取实际加载它的类加载器。如果`ClassLoader`是`Bootstrap ClassLoader`，返回值为`null`。
 ### 应用场景
-- 热部署。在不重启Java程序的情况下，动态替换类的实现。
+> 可以通过`ClassLoader`的`loadClass`或`Class.forName`自己加载类，但什么情况需要自己加载类呢？很多应用使用面向接口的编程，接口具体的实现类可能有很多，适用于不同的场合，具体使用哪个实现类在配置文件中配置，通过更改配置，不用改变代码，就可以改变程序的行为，在设计模式中，这是一种策略模式。
+如：`JDBC`数据库驱动的加载(接口与具体的实现分离)。
+- 热部署。在不重启应用的情况下，当类的定义即字节码文件修改后，能够替换该`Class`创建的对象。
 - 应用的模块化和相互隔离。不同的ClassLoader可以加载相同的类但互相隔离、互不影响。
-- 从不同地方灵活加载。系统默认的ClassLoader一般从本地的．class文件或jar文件中加载字节码文件，通过自定义的ClassLoader，我们可以从共享的Web服务器、数据库、缓存服务器等其他地方加载字节码文件
-### 类加载器种类
-- 引导类加载器（Bootstrap ClassLoader）：这个加载器是Java虚拟机实现的一部分，一般是C语言实现的，它负责加载Java的基础类，主要是<JAVA_HOME>/lib/rt.jar，日常用的Java类库比如String、ArrayList等都位于该包内
-- 扩展类加载器（Extension ClassLoader）：这个加载器的实现类是sun.misc.Laun-cher$ExtClassLoader，它负责加载Java的一些扩展类，一般是<JAVA_HOME>/lib/ext目录中的jar包
-- 系统类加载器（Application ClassLoader）：这个加载器的实现类是sun.misc. Launcher$AppClassLoader，它负责加载应用程序的类，包括自己写的和引入的第三方法类库，即所有在类路径中指定的类。
+- 从不同地方灵活加载。系统默认的`ClassLoader`一般从本地的`.class`文件或`jar`文件中加载字节码文件，通过自定义的`ClassLoader`，我们可以从共享的Web服务器、数据库、缓存服务器等其他地方加载字节码文件
+### 类加载器种类 
+- 引导类加载器（`Bootstrap ClassLoader`）：这个加载器是Java虚拟机实现的一部分，一般是C语言实现的，它负责加载Java的基础类，主要是`<JAVA_HOME>/lib/rt.jar`，日常用的`Java`类库比如`String`、`ArrayList`等都位于该包内
+- 扩展类加载器（`Extension ClassLoader`）：这个加载器的实现类是`sun.misc.Laun-cher$ExtClassLoader`，它负责加载Java的一些扩展类，一般是`<JAVA_HOME>/lib/ext`目录中的`jar`包
+- 系统类加载器（`Application ClassLoader`）：这个加载器的实现类是`sun.misc. Launcher$AppClassLoader`，它负责加载应用程序的类，包括自己写的和引入的第三方法类库，即所有在类路径中指定的类。
 ### 类加载的流程
-负责加载类的类就是类加载器，它的输入是完全限定的类名，输出是Class对象
-- 1、判断是否已经加载过了，加载过了，直接返回Class对象，一个类只会被一个Class-Loader加载一次。
-- 2、如果没有被加载，先让父ClassLoader去加载，如果加载成功，返回得到的Class对象。
-- 3、在父ClassLoader没有加载成功的前提下，自己尝试加载类。
+负责加载类的类就是类加载器，它的输入是完全限定的类名，输出是`Class`对象
+- 1、判断是否已经加载过了，加载过了，直接返回`Class`对象，一个类只会被一个`Class-Loader`加载一次。
+- 2、如果没有被加载，先让父`ClassLoader`去加载，如果加载成功，返回得到的`Class`对象。
+- 3、在父`ClassLoader`没有加载成功的前提下，自己尝试加载类。
 ### Q&A
-“双亲委派”模型
-- 优先让父ClassLoader去加载，可以避免Java类库被覆盖的问题。例如，当要求系统类加载器(Application ClassLoader)加载一个系统类（比如，java.util.ArrayList）时，它首先要求扩展类加载器(Extension ClassLoader)进行加载，该扩展类加载器则首先要求引导类加载器(Bootstrap ClassLoader)进行加载。
+- “双亲委派”模型
+> 优先让父类加载器去加载，可以避免`Java`类库被覆盖的问题。比如，用户程序也定义了一个类`java.lang.String`，通过双亲委派，`java.lang.String`只会被`Bootstrap ClassLoader`加载，避免自定义的`String`覆盖`Java`类库的定义。
 ## 代理
 调用者不直接调用实际对象，而是调用代理对象，由代理对象来访问实际对象，可以在代理类中动态的添加逻辑，如权限控制等。
 #### 静态代理
@@ -184,3 +187,4 @@ JMM定义了线程和主内存之间的抽象关系：**线程之间的共享变
 正则表达式是一串字符，它描述了一个文本模式，利用它可以方便地处理文本，包括文本的查找、替换、验证、切分等。
 ## 函数式编程
 Lambda表达式：一种紧凑的传递代码的方式。针对常见的集合数据处理，Java 8引入了一套新的类库，位于包java.util.stream下，称为Stream API。
+## Q&A
