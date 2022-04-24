@@ -5,7 +5,7 @@
 > - 字符串插值:$variableName (或 ${expression})
 ### 变量
 - 默认值
-> 未初始化以及可空类型的变量拥有一个默认的初始值 null。
+> 未初始化以及可空类型的变量拥有一个默认的初始值 null。用 `?` 制定变量可为空还是不可为空。
 ```text
 int? lineCount;
 ```
@@ -14,13 +14,31 @@ int? lineCount;
 > 一个 final 变量只可以被赋值一次；一个 const 变量是一个编译时常量。
 - 内置类型()
 ### 函数
-函数可以有两种形式的参数：必要参数、可选参数。
+函数也是对象并且类型为 `Function`，可以有两种形式的参数：必要参数、可选参数。可以使用箭头函数(`=>`)
 - 命名参数
 > 命名参数默认为可选参数，除非他们被特别标记为 `required`。
 ```text
 // 使用 {参数1, 参数2, …} 来指定命名参数
 void enableFlags({bool? bold, bool? hidden}) {...}  
 ```
+- 可选参数
+> 将参数使用中括号`[]`括起来，用来表明是可选位置参数
+```dart
+//[] 代表可选参数，函数被调用时，可以选择不传值
+String getUserInfo(String name, String gender, [String? from]) {
+  var info = '$name\'s gender $gender';
+  if (from != null) {
+    info = '$info come from $from';
+  }
+  return info;
+}
+//调用
+getUserInfo('user','M')
+
+```
+### 类
+- 扩展类(继承)
+> Dart 支持单继承。
 ### 空安全
 选择使用空安全时，代码中的类型将默认是非空的，除非你声明它们可空，它们的值都不能为空。
 有了空安全，原本处于运行时的空值引用错误将变为编译时的分析错误。
