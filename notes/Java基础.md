@@ -43,8 +43,8 @@ Map 接口有四个主要的实现类：`HashMap`、`HashTable`(线程安全)、
 <img src="https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/e777e3b6451b45d8804d0e92e7dd0952~tplv-k3u1fbpfcp-watermark.image">
 
 ### 并发容器
-- `CopyOnWriteArrayList`
-> 线程安全，可以被多个线程并发访问
+- `CopyOnWriteArrayList` & `CopyOnWriteArraySet`(写时复制的`List`和`Set`)
+> 线程安全，可以被多个线程并发访问。
 ### `HashMap`
 
 > 只需要`O(1)`的时间就可以把一个元素存入或读出，根据键快速查找到对应的值。
