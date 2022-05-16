@@ -68,6 +68,18 @@ int? aNullableInt = null;
 所谓线性布局，即指沿水平或垂直方向排列子组件。Flutter 中通过Row和Column来实现线性布局。
 ### 包管理
 使用配置文件`pubspec.yaml`来管理第三方依赖包。会从 `Google` 提供的 [Pub 仓库](https://pub.dev/) 去下载对应的依赖包。
+### 状态管理
 
+
+### 数据存储与通信
+#### 数据持久化
+- 1、读写文件
+> - 临时目录：该目录下的文件可以被系统随时清除。
+> - 文档目录：应用中直接管理文件的路径，只有当应用被卸载后该目录下的文件才会被清除。
+- 2、数据库
+> 在Flutter运行的Android、iOS两个平台上都内置了自己的SQLite数据库。
+#### 网络通信
+使用`Dart`中的`http`库可以轻松实现与应用的网络交互。
+> 由于网络请求是一个耗时的任务，因此在异步方法使用`await`关键词修饰`http.get()`方法，表示等待请求的数据。
 ## Reference
 [《Flutter实战》](https://book.flutterchina.club/)
