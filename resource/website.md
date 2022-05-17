@@ -25,6 +25,8 @@
 - https://draveness.me/
 - 创造者日报：https://creatorsdaily.com/
 - 数据库教程：https://github.com/dunwu/db-tutorial
+## 创意网站
+- 自动生成`Logo`：https://logosc.cn/
 ## 文章
 [十年设计工作的一些思考](https://mp.weixin.qq.com/s/AwL8y5uSBVuLIVg9RkSqmw)
 - 时间带来的危机感
