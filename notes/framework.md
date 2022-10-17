@@ -1,6 +1,6 @@
-<p> <a href="../README.md">返回首页</a></p>
+[返回首页](../README.md)
 
-## Spring
+## `Spring`
 ### Bean 的作用域
 - singleton: 单例模式
 > 当`spring`创建`IoC`容器的时，会欲初始化所有的该作用域实例，加上`lazy-init`就可以避免预处理
@@ -14,8 +14,6 @@
 ### 循环依赖
 BeanA对象的创建依赖于BeanB，BeanB对象的创建也依赖于BeanA，这就造成了死循环，如果不做处理的话会造成栈溢出。
 Spring通过提前曝光机制，利用三级缓存解决循环依赖问题。
-### `@Transactional`实现原理
-
 
 ### Q&A
 - `Controller`是单例还是多例？
@@ -74,12 +72,6 @@ Spring Boot在所有**内部日志**中使用Commons Logging，但是默认配�
 > - `TokenEndpoint`：用于获取令牌的端点，默认路径：`/oauth/token`
 - 受保护资源
 > 通过过滤器链来进行处理
-
-
-
-## Spring Cloud
-
-
 
 ## 文章推荐
 - [SpringBoot 配置类解析](https://mp.weixin.qq.com/s/NvPO5-FWLiOlrsOf4wLaJA)

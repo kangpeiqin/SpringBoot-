@@ -1,8 +1,6 @@
-<p> <a href="../README.md">返回首页</a></p>
+[返回首页](../README.md)
 
 # `MySQL`
-[架构](#架构) &nbsp; [存储引擎](#存储引擎) &nbsp; [数据类型](#数据类型)&nbsp;[分区](#分区) &nbsp; [索引](#索引) &nbsp;[SQL优化](#SQL优化)&nbsp;[事务](#事务) &nbsp;[并发控制](#并发控制) &nbsp;[日志](#日志) &nbsp;[备份](#备份)
-
 ## 架构
 ![image.png](https://i.bmp.ovh/imgs/2021/09/d3ca5f9a109ba68e.png)
 ## 存储引擎

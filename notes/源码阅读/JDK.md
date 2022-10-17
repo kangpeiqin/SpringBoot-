@@ -1,8 +1,6 @@
-<p> <a href="../源码阅读.md">返回</a></p>
+[返回](/notes/源码阅读.md)
 
 # `JDK-1.8`源码阅读
-[String](#String) &nbsp; [Integer](#Integer) &nbsp;[StringBuilder](#StringBuilder)
-[ArrayList](#ArrayList) &nbsp;[LinkedList](#LinkedList) &nbsp; [HashMap](#HashMap)
 ## 总结
 > 封装复杂操作，简化接口调用。实现什么样的功能：数据结构(用什么结构存储数据(基本的数据类型)) + 一组操作
 ## 基础类

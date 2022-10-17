@@ -1,24 +1,22 @@
-<details> 
-    <summary>资源汇总</summary>
-    <a href="./resource/book.md">技术书籍</a> &nbsp;&nbsp;
-    <a href="./resource/website.md">推荐网站</a> &nbsp;&nbsp;
-</details>
+## Java
+- [Java 基础](./notes/Java基础.md)
+- [Java 虚拟机](./notes/JVM.md)
 
-#### :cloud: 笔记整理
+## DataBase
+- [MySQL](./notes/MySQL.md)
+- [Redis](./notes/Redis.md)
 
-<div>
-  <li><a href="./notes/Java基础.md">Java 基础</a> </li>
-  <li><a href="./notes/数据库.md">数据库</a></li>
-  <li><a href="./notes/designPattern.md">设计模式</a></li>
-  <li><a href="./notes/Redis.md">Redis</a></li>
-  <li><a href="./notes/JVM.md">Java 虚拟机</a></li>
-  <li><a href="./notes/framework.md">常用框架</a></li>
-  <li><a href="./notes/数据结构&算法.md">算法</a></li>
-  <li><a href="./notes/操作系统.md">操作系统</a></li>
-  <li><a href="./notes/分布式.md">分布式</a></li>
-  <li><a href="./notes/源码阅读.md">源码阅读</a></li>
-  <li><a href="./notes/消息队列.md">消息队列</a></li>
-  <li><a href="./notes/计算机网络.md">计算机网络</a></li>
-  <li><a href="./notes/Linux.md">Linux</a></li>
-  <li><a href="./notes/Q&A.md">Q&A</a></li>
-</div>
+## Data Structure & Algorithm
+- [LeetCode 题解](./notes/算法/LeetCode.md)
+- [剑指 Offer 题解](./notes/算法/剑指Offer.md)
+- [基础概念](notes/算法/基础概念.md)
+
+## Open Source
+- [常用框架](./notes/framework.md)
+- [源码阅读](./notes/源码阅读.md)
+
+## Operate System
+- [Linux](./notes/Linux.md)
+
+## Resource
+- [Recommend Website](./resource/website.md)

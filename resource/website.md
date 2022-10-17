@@ -1,4 +1,4 @@
-<p> <a href="../README.md">返回首页</a></p>
+[返回首页](../README.md)
 
 ## 推荐网站
 - Java8教程：https://github.com/winterbe/java8-tutorial
@@ -25,6 +25,7 @@
 - https://draveness.me/
 - 创造者日报：https://creatorsdaily.com/
 - 数据库教程：https://github.com/dunwu/db-tutorial
+- 精益副业：http://r.ftqq.com/lean-side-bussiness
 ## 创意网站
 - 自动生成`Logo`：https://logosc.cn/
 ## 文章

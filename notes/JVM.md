@@ -1,6 +1,5 @@
-<p> <a href="../README.md">返回首页</a></p>
-
-# JVM
+[返回首页](../README.md)
+# `JVM`
 ## 简介
 Java能够做到一次编写，到处运行，实现跨平台，主要是因为Java虚拟机对不同平台的不同实现。源文件(.java)文件被编译成字节码文件(.class)后，交由JVM来执行。
 JVM会自动管理内存，不需要程序员手动管理内存。
@@ -53,7 +52,6 @@ Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为
 - `jmap`(Memory Map for Java): 命令用于生成堆转储快照
 - `jhat`(JVM Heap Analysis Tool)：虚拟机堆转储快照分析工具
 - `jstack`(Stack Trace for Java): 命令用于生成虚拟机当前时刻的线程快照
-### Q & A
 
 ## 参考链接：
 - https://github.com/doocs/jvm

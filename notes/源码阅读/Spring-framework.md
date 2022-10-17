@@ -1,4 +1,4 @@
-<p> <a href="../源码阅读.md">返回</a></p>
+[返回](/notes/源码阅读.md)
 
 # Spring-framework 源码阅读
 ## 源码编译
@@ -7,7 +7,7 @@
 > - 在IDEA中的Terminal窗口中执行命令：`gradlew :spring-oxm:compileTestJava`
 - 运行单元测试报错问题
 ```text
-Error:(350, 51) java: 找不到符号   符号:   变量 CoroutinesUtils
+Error:(350, 51) java: 找不到符号变量 CoroutinesUtils
 ```
 <a href="https://www.cnblogs.com/bruceChan0018/p/14214856.html">解决方案</a>：导入相应的依赖模块，如下图所示
 ![dependency](https://s3.bmp.ovh/imgs/2021/09/c95b9d18b9504ff7.jpg)
