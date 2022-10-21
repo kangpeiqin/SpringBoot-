@@ -1,5 +1,18 @@
 [返回首页](../README.md)
 # `Linux`
+## 服务管理
+### 服务启动
+```bash
+# 设置允许/禁止开机启动
+systemctl enable/disable xxx
+# 某个系统服务启动/停止/状态
+systemctl start/stop/restart/status xxx
+```
+### 服务日志管理
+```bash
+# 查看某个服务的日志：follow/lines/unit
+journalctl -f -n 200 -u xxx 
+```
 ## 重定向
 **I/O 重定向可以改变输出内容发送的目的地，也可以改变输入内容的来源地。**
 默认情况下，输出内容显示在屏幕上，输入内容来自键盘。
@@ -78,8 +91,8 @@ unzip foo.zip
 ```bash
 # 跟踪网络数据包的传输路径，显示数据连接所经过的站点(netstat)
 traceroute www.baidu.com
-# 检查网络设置及其相关统计
-netstat -ie
+# 查看端口
+netstat -tnlp
 ```
 - 文件传输与下载
 ```bash
@@ -102,15 +115,18 @@ rpm -qa
 ```bash
 # 进程信息查看
 ps -aux
+# 查看应用进程
+ps -ef|grep java
 # 动态查看进程信息
 top
 ```
-## 存储介质
-- 挂载、卸载存储设备
-> 管理存储设备首先要做的就是将该设备添加到文件系统树中，从而允许操作系统可以操作该设备，这个过程称之为挂载。
-## shell 脚本
-## 环境（environment）
+## 环境
+```bash
+# 查看环境变量
+printenv | less
+# 查看特定环境变量
+echo $HOME
+```
 
-## 参考：
-- https://www.runoob.com/linux/linux-vim.html
+## 参考
 - 《Linux 命令行大全》
