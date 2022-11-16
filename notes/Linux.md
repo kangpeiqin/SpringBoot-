@@ -119,6 +119,8 @@ ps -aux
 ps -ef|grep java
 # 动态查看进程信息
 top
+# 根据进程 ID 查看启动文件路径
+ls -l /proc/pid
 ```
 ## 环境
 ```bash
@@ -127,6 +129,5 @@ printenv | less
 # 查看特定环境变量
 echo $HOME
 ```
-
 ## 参考
 - 《Linux 命令行大全》
