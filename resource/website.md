@@ -26,6 +26,7 @@
 - 创造者日报：https://creatorsdaily.com/
 - 数据库教程：https://github.com/dunwu/db-tutorial
 - 精益副业：http://r.ftqq.com/lean-side-bussiness
+- 平面设计：https://www.canva.cn/
 ## 创意网站
 - 自动生成`Logo`：https://logosc.cn/
 ## 文章
