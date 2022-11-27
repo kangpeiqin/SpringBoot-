@@ -23,12 +23,14 @@
 - 代码规范：https://google.github.io/styleguide/javaguide.html
 - https://feeds.pub/explore
 - https://draveness.me/
+- web 开发：https://mp.weixin.qq.com/s/_B-lF65Yw_Ap8Xo5QZx5og
 - 创造者日报：https://creatorsdaily.com/
 - 数据库教程：https://github.com/dunwu/db-tutorial
 - 精益副业：http://r.ftqq.com/lean-side-bussiness
 - 平面设计：https://www.canva.cn/
-## 创意网站
 - 自动生成`Logo`：https://logosc.cn/
+- architect awesome：https://github.com/xingshaocheng/architect-awesome/blob/master/README.md
+- 书籍搜索：https://alibrary.top/query
 ## 文章
 [十年设计工作的一些思考](https://mp.weixin.qq.com/s/AwL8y5uSBVuLIVg9RkSqmw)
 - 时间带来的危机感
