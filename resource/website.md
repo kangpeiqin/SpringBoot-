@@ -15,7 +15,7 @@
 - https://github.com/xkcoding/spring-boot-demo.git
 - Git常用命令：https://github.com/flyhigher139/Git-Cheat-Sheet
 - 番茄创意：http://www.geektomato.com/i/q61t5p6p
-- 流程图绘制：https://app.diagrams.net/
+- 流程图绘制(draw.io)：https://app.diagrams.net/
 - SpringBoot in Action: https://github.com/hansonwang99/Spring-Boot-In-Action/
 - Java-Interview：https://github.com/gzc426/Java-Interview
 - free-project-course：https://github.com/resumejob/free-project-course
