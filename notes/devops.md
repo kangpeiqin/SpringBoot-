@@ -76,3 +76,103 @@ docker run -p 80:80 --name nginx --restart always \
 -v /data/nginx/conf.d:/etc/nginx/conf.d \ 
 -v /data/nginx/logs:/var/log/nginx -d nginx  # 日志挂载
 ```
+- 安装 `MongoDB`
+```bash
+docker run --name mongo \
+-p 27017:27017 --restart=always \
+-v /data/mongo/data:/data/db \
+-v /data/mongo/conf:/data/conf \
+-v /data/mongo/log:/data/log \
+-d mongo
+
+docker exec -it mongo mongo admin
+db.createUser({user:'admin',pwd:'admin',roles:[{role:'readWrite',db:'admin'}],})
+db.auth('admin','admin')
+show users
+db.createUser({user:'admin',pwd:'admin',roles:[{role:'readWrite',db:'mall-portal-dev'}]})
+db.updateUser('admin', {roles:[{role:"readWrite",db:"mall-portal-dev"}]});
+use database
+db.createUser({user:'admin',pwd:'admin',roles:[{role:'readWrite',db:'mall-portal-dev'}]})
+```
+> `MongoDB` 配置文件(`mongodb.conf`)
+```properties
+#端口
+port=27017
+#数据库文件存放目录
+dbpath=/data/mongo/data
+#日志文件存放路径
+logpath=/data/mongo/log
+#使用追加方式写日志
+logappend=true
+#以守护线程的方式运行，创建服务器进程
+fork=true
+#最大同时连接数
+maxConns=100
+#不启用验证
+#noauth=true
+#每次写入会记录一条操作日志
+journal=true
+#存储引擎有mmapv1、wiredTiger、mongorocks
+storageEngine=wiredTiger
+#访问IP
+bind_ip=0.0.0.0
+#用户验证
+#auth=true
+```
+- `ES` 和 `kibana` 安装
+```bash
+# 创建目录 /data/es 及其子目录，设置权限
+chmod 777 /data/es
+# 下载镜像
+docker pull docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+docker pull docker.elastic.co/kibana/kibana:7.6.2
+docker pull docker.elastic.co/logstash/logstash:7.6.2 
+# 查看镜像ID
+docker image 
+# 安装 ES
+docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \
+--restart=always \
+-e "discovery.type=single-node" \
+-e ES_JAVA_OPTS="-Xms512m -Xmx1024m" \
+-v /data/es/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
+-v /data/es/data:/usr/share/elasticsearch/data \
+-v /data/es/plugins:/usr/share/elasticsearch/plugins \
+-d container_id
+# ES 配置文件修改
+echo "http.host: 0.0.0.0">> /data/es/config/elasticsearch.yml
+# 安装 kibana
+docker run --name kibana -e ELASTICSEARCH_HOSTS=http://192.168.150.58:9200 -p 5601:5601 -d container_id
+# 下载 IK 分词器
+https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.6.2/elasticsearch-analysis-ik-7.6.2.zip
+# 测试是否安装成功
+POST _analyze
+{
+  "analyzer": "ik_max_word",
+  "text":"测试数据"
+}
+# 将压缩包放到 /data/es/plugins/ik 目录下,重启ES
+docker restart elasticsearch
+# logstash
+docker run --name logstash -p 4560:4560 -p 4561:4561 -p 4562:4562 -p 4563:4563 \
+--restart=always \
+-e ES_JAVA_OPTS="-Xms512m -Xmx1024m" \
+-v /data/logstash/config:/usr/share/logstash/config \
+-v /data/logstash/pipeline:/usr/share/logstash/pipeline \
+-d fa5b3b1e9757
+
+docker run -d --name=logstash fa5b3b1e9757
+
+docker cp logstash:/usr/share/logstash/config /data/logstash/
+docker cp logstash:/usr/share/logstash/pipeline /data/logstash/
+
+# 进入logstash容器
+docker exec -it logstash /bin/bash
+# 进入bin目录
+cd /bin/
+# 安装插件
+logstash-plugin install logstash-codec-json_lines
+# 退出容器
+exit
+# 重启logstash服务
+docker restart logstash
+```
