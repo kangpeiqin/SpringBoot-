@@ -176,3 +176,22 @@ exit
 # 重启logstash服务
 docker restart logstash
 ```
+- `RabbitMQ` 安装
+```bash
+mkdir -p /data/rabbitmq/{data,conf,log}
+chmod -R 777 /data/rabbitmq #   授权
+
+docker run -p 5672:5672 -p 15672:15672 \
+-v /data/rabbitmq/data:/var/lib/rabbitmq \
+-v /data/rabbitmq/conf:/etc/rabbitmq \
+-v /data/rabbitmq/log:/var/log/rabbitmq \
+--name rabbitmq -d rabbitmq:management
+
+docker exec -it rabbitmq bash
+rabbitmq-plugins enable rabbitmq_management
+
+docker exec -it rabbitmq /bin/bash
+rabbitmqctl add_user admin admin #创建用户 
+rabbitmqctl set_user_tags admin administrator #给用户授权角色
+rabbitmqctl set_permissions -p / admin "." "." ".*" #给用户添加权限
+```
