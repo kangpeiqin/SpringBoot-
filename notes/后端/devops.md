@@ -197,3 +197,5 @@ rabbitmqctl add_user admin admin #创建用户
 rabbitmqctl set_user_tags admin administrator #给用户授权角色
 rabbitmqctl set_permissions -p / admin "." "." ".*" #给用户添加权限
 ```
+### 部署脚本示例
+

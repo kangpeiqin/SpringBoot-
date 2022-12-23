@@ -37,6 +37,7 @@ MyBatis属于半自动化的ORM(Object Relational Mapping：对象关系映射)�
 配置文件的解析:
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b60d3381de35475cb2bb3fd3e5d3e500~tplv-k3u1fbpfcp-watermark.image)
 > 1、读取主配置文件，将XML文件解析成Configuration对象，利用Configuration对象构建sqlSessionFactory(SqlSession工厂，SqlSession定义了操作数据库的API接口)
+
 ```
 //读取主配置文件
 try (Reader reader = Resources.getResourceAsReader("org/apache/ibatis/autoconstructor/mybatis-config.xml")) {
