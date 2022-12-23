@@ -1,17 +1,19 @@
-## `CI/CD` 持续集成和持续交付
-记录一下如何使用 `Jenkins` 进行项目自动化部署
-### `Jenkins` 自动化部署的原理
-> Jenkins 可以使用服务器提供的登录凭证，登录到远程服务器当中，执行 `Shell` 脚本从而实现自动化部署。此外，Jenkins 也提供了
-很多插件进行功能扩展，如 Git、Docker、HTTP 等插件，这样可以使用这些工具提供的一些命令，如拉取代码、Docker 部署等。 
+[返回首页](../../README.md)
 
-![原理](/asset/images/jenkins.jpg "Magic Gardens")
+## `CI/CD` 持续集成和持续交付
+记录一下如何使用 `Jenkins` 进行项目自动化部署的流程
+### `Jenkins` 自动化部署的原理
+> Jenkins 可以使用服务器提供的登录凭证，登录到远程服务器当中，执行 `Shell` 脚本从而实现自动化部署。此外，Jenkins 提供了
+很多插件进行功能扩展，如 Git、Docker、HTTP 等插件，这样可以使用这些工具提供的一些命令，如拉取代码、执行 Docker 命令、发送 HTTP 请求等。 
+下面是一张简单的原理图：
+![原理](../../resource/asset/images/jenkins.jpg)
 
 > 另外可以使用 Docker 进行部署，这样的优势是：一次构建，到处运行。可以通过网络，快速分发运行打包好的软件：
 我们可以从镜像仓库快速获取构建好的镜像，然后生成容器直接运行，就像直接从应用市场里直接获取软件进行安装一样方便，
 可以帮我们省去服务迁移重新打包构建部署等繁琐的步骤。
 ### 基础环境配置与搭建
 #### Docker 的使用与安装
-具体可以参考：https://vuepress.mirror.docker-practice.com/，以下是简单的安装流程
+> 具体可以参考：https://vuepress.mirror.docker-practice.com/，以下是简单的安装流程
 ```bash
 # 使用脚本自动安装
 curl -fsSL get.docker.com -o get-docker.sh
@@ -21,7 +23,7 @@ sudo systemctl enable docker
 sudo systemctl start docker
 ```
 #### 使用 Docker 安装基础软件
-- 安装 `Jenkins`
+##### `Jenkins`
 ```bash
 docker run -d -p 8060:8080 -p 50000:50000 \
 --user=root \
@@ -35,7 +37,7 @@ docker run -d -p 8060:8080 -p 50000:50000 \
 -v /data/node/node-v14.16.1-linux-x64:/usr/local/nodejs \ #NodeJS 目录挂载
 jenkins/jenkins
 ```
-- 安装 `NodeJS`
+##### `NodeJS`
 > 用于前端工程打包
 ```bash
 cd /data/nodejs
@@ -48,7 +50,7 @@ export PATH=$NODE_HOME/bin:$PATH
 # 检测是否安装成功
 node -v
 ```
-- 安装 `Maven`
+##### `Maven`
 ```bash
 cd /data/maven
 wget https://mirrors.aliyun.com/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
@@ -60,7 +62,7 @@ export M2_HOME=/data/maven/apache-maven-3.6.3                                   
 # 刷新配置
 source /etc/profile         
 ```
-- 安装 `Nginx`
+##### `Nginx`
 ```bash
 # 从容器当中复制配置文件到指定目录
 docker run -p 80:80 --name nginx
@@ -76,7 +78,7 @@ docker run -p 80:80 --name nginx --restart always \
 -v /data/nginx/conf.d:/etc/nginx/conf.d \ 
 -v /data/nginx/logs:/var/log/nginx -d nginx  # 日志挂载
 ```
-- 安装 `MongoDB`
+##### `MongoDB`
 ```bash
 docker run --name mongo \
 -p 27017:27017 --restart=always \
@@ -119,7 +121,7 @@ bind_ip=0.0.0.0
 #用户验证
 #auth=true
 ```
-- `ES` 和 `kibana` 安装
+##### `ES` 、`kibana` 、`logstash`
 ```bash
 # 创建目录 /data/es 及其子目录，设置权限
 chmod 777 /data/es
@@ -143,7 +145,7 @@ echo "http.host: 0.0.0.0">> /data/es/config/elasticsearch.yml
 # 安装 kibana
 docker run --name kibana -e ELASTICSEARCH_HOSTS=http://192.168.150.58:9200 -p 5601:5601 -d container_id
 # 下载 IK 分词器
-https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.6.2/elasticsearch-analysis-ik-7.6.2.zip
+wget https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.6.2/elasticsearch-analysis-ik-7.6.2.zip
 # 测试是否安装成功
 POST _analyze
 {
@@ -176,7 +178,7 @@ exit
 # 重启logstash服务
 docker restart logstash
 ```
-- `RabbitMQ` 安装
+##### `RabbitMQ` 
 ```bash
 mkdir -p /data/rabbitmq/{data,conf,log}
 chmod -R 777 /data/rabbitmq #   授权
