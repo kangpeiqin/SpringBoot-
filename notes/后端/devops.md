@@ -303,14 +303,16 @@ pipeline {
                      }
        			    //body定义,根据实际情况而定
        			    def body = [
-                           imageName: "${env.REGISTRY_HOST}/${project_name}",
-                           tag: "${env.TAG}",
-                           port: "${port}" ,
-                           simpleImageName: "${project_name}",
-                           envs: [
-                                JVM_ARGS: "${env.JVM_ARG}"
-                           ],
-                           volumes: ["${env.LOG_MES_FILE}:${env.LOG_FILE_URL}"]
+                         imageName: "${env.REGISTRY_HOST}/${project_name}",
+                         tag: "${env.TAG}",
+                         port: "${port}" ,
+                         simpleImageName: "${project_name}",
+                         envs: [
+                              JVM_ARGS: "${env.JVM_ARG}",
+                              'spring.profiles.active': "dev",
+                              '-jasypt.encryptor.password': "Wwzl@sinceTech2025"
+                         ],
+                         volumes: ["${env.LOG_FILE}:${env.LOG_FILE_URL}"]
                     ]
        			    sh "echo '================开始调用目标服务器发布================'"
        			    response = httpRequest acceptType: 'APPLICATION_JSON', consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: toJson(body), responseHandle: 'NONE', url: "${env.REMOTE_EXECUTE_HOST}"
