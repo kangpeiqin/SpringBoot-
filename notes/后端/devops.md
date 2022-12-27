@@ -198,4 +198,141 @@ rabbitmqctl set_user_tags admin administrator #给用户授权角色
 rabbitmqctl set_permissions -p / admin "." "." ".*" #给用户添加权限
 ```
 ### 部署脚本示例
+```groovy
+pipeline {
+   agent any
+
+   //环境变量，变量名称都可以自定义，在后面的脚本中使用
+   environment {
+      //git仓库
+	  GIT_REGISTRY = 'http://ip:port/xxx.git'
+	  //分支
+	  GIT_BRANCH = 'develop'
+	  //凭证
+	  GITLAB_ACCESS_TOKEN_ID = 'xxxx-xxx-xxxx-xxx'
+	  //docker 仓库地址
+	  REGISTRY_HOST = 'ip:5000'
+      //镜像tag
+      TAG = "v1.0.${currentBuild.number}"
+      //日志目录，容器内目录
+      LOG_DIR = '/var/logs'
+      LOG_FILE_URL = '/logs'
+       //宿主机目录
+      LOG_FILE = "/home/logs/xxx"
+      JVM_ARG = "-server -Xms1024m -Xmx1024m  -XX:+HeapDumpOnOutOfMemoryError  -XX:HeapDumpPath=${LOG_DIR}/dump/dump-yyy.log  -XX:ErrorFile=${LOG_DIR}/jvm/jvm-crash.log"
+      //远程发布服务，这样可以绕过堡垒机进行部署
+      REMOTE_EXECUTE_HOST = 'http://ip:port/shell'
+   }
+
+   stages {
+      stage('Build') {
+         steps {
+            // 获取代码
+            git credentialsId: "${env.GITLAB_ACCESS_TOKEN_ID}", url: "${env.GIT_REGISTRY}", branch: "${env.GIT_BRANCH}"
+            // maven 打包
+            //sh "mvn --projects ${project_name} --also-make clean install"
+            sh "mvn clean install"
+         }
+      }
+      stage('Image Build') {
+      	// 将jar包拷贝到Dockerfile所在目录，并制作镜像
+      	steps {
+      		sh '''
+                project_dir="${project_name}"
+                // 条件判断，可以修改编译后文件的目录地址
+                if [ "${project_name}" = "system" ] || [ "${project_name}" = "base" ] ] ; then
+                     project_dir="dir/${project_name}"
+                fi
+                rm -rf ./docker/jenkins/${project_name}
+                mkdir ./docker/jenkins/${project_name}
+                cp ./docker/jenkins/Dockerfile ./docker/jenkins/${project_name}
+      	        cp ./${project_dir}/target/*.jar ./docker/jenkins/${project_name}/${project_name}.jar
+      	        cd ./docker/jenkins/${project_name}
+                sed -i "s/PROJECT_NAME/${project_name}/g" Dockerfile
+                echo '================开始制作并上传镜像================'
+                docker build -t ${project_name} .
+                echo '================制作镜像完成================'
+                cd ..
+                rm -rf ${project_name}
+      		'''
+      	}
+      }
+      stage('Image Push') {
+            //将制作好的镜像推送到镜像仓库
+      		steps {
+      			sh "echo '================上传镜像================'"
+                  sh "docker tag ${project_name}:latest ${env.REGISTRY_HOST}/${project_name}:${env.TAG}"
+                  sh "docker push ${env.REGISTRY_HOST}/${project_name}:${env.TAG}"
+      			sh "echo '================镜像上传成功================'"
+      			sh "docker rmi ${env.REGISTRY_HOST}/${project_name}:${env.TAG}"
+      			sh "docker rmi ${project_name}:latest"
+      		}
+            //steps {
+              //      script {
+                         //定义函数
+                //        def toLowerCase = {
+                  //          input ->input.toLowerCase()
+                 //       }
+                 //       def moduleName = toLowerCase("${project_name}")
+                //	    sh "echo '================上传镜像================'"
+                //      sh "docker tag ${moduleName}:latest ${env.REGISTRY_HOST}/${moduleName}:${env.TAG}"
+                //      sh "docker push ${env.REGISTRY_HOST}/${moduleName}:${env.TAG}"
+                //	    sh "echo '================镜像上传成功================'"
+                //	    sh "docker rmi ${env.REGISTRY_HOST}/${moduleName}:${env.TAG}"
+                //	    sh "docker rmi ${moduleName}:latest"
+                //	}
+            //}
+      }
+      stage('Execute service') {
+       		steps {
+       		    //以下整个脚本都依赖jenkins插件：HTTP Request
+       		    //将body转换为json
+                script {
+                     def toJson = {
+                       input ->
+                       groovy.json.JsonOutput.toJson(input)
+                     }
+                     //部署的一些模块名称
+                     def map = ['gateway':'8100','system':'8300']
+                     def port
+                     for ( e in map ) {
+                         if("${project_name}" == "${e.key}"){
+                               print "key = ${e.key}, value = ${e.value}"
+                               port = "${e.value}"
+                          }
+                     }
+       			    //body定义,根据实际情况而定
+       			    def body = [
+                           imageName: "${env.REGISTRY_HOST}/${project_name}",
+                           tag: "${env.TAG}",
+                           port: "${port}" ,
+                           simpleImageName: "${project_name}",
+                           envs: [
+                                JVM_ARGS: "${env.JVM_ARG}"
+                           ],
+                           volumes: ["${env.LOG_MES_FILE}:${env.LOG_FILE_URL}"]
+                    ]
+       			    sh "echo '================开始调用目标服务器发布================'"
+       			    response = httpRequest acceptType: 'APPLICATION_JSON', consoleLogResponseBody: true, contentType: 'APPLICATION_JSON', httpMode: 'POST', requestBody: toJson(body), responseHandle: 'NONE', url: "${env.REMOTE_EXECUTE_HOST}"
+       		        sh "echo '================结束调用目标服务器发布================'"
+       		   }
+       	  }
+        }
+    }
+}
+
+```
+#### `Dockerfile` 文件示例
+```
+# 该镜像需要依赖的基础镜像
+FROM java:8
+# 将当前目录下的jar包复制到docker容器的/目录下
+ADD PROJECT_NAME-1.0-SNAPSHOT.jar /PROJECT_NAME-1.0-SNAPSHOT.jar
+# 声明服务运行在8088端口
+EXPOSE 8080
+# 指定docker容器启动时运行jar包
+ENTRYPOINT ["java","-Xmx512m","-jar","/PROJECT_NAME-1.0-SNAPSHOT.jar"]
+# 指定维护者的名字
+MAINTAINER K
+```
 
