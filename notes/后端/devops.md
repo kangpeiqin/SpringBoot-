@@ -310,7 +310,7 @@ pipeline {
                          envs: [
                               JVM_ARGS: "${env.JVM_ARG}",
                               'spring.profiles.active': "dev",
-                              '-jasypt.encryptor.password': "Wwzl@sinceTech2025"
+                              '-jasypt.encryptor.password': "xxxxxxx"
                          ],
                          volumes: ["${env.LOG_FILE}:${env.LOG_FILE_URL}"]
                     ]
