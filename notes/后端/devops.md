@@ -52,13 +52,15 @@ node -v
 ```
 ##### `Maven`
 ```bash
-cd /data/maven
+cd /home/mydata/data/maven
 wget https://mirrors.aliyun.com/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
 # 解压缩
 tar -xzvf apache-maven-3.6.3-bin.tar.gz
 # 环境变量配置：添加环境变量
 vim /etc/profile
-export M2_HOME=/data/maven/apache-maven-3.6.3                                         export PATH=$PATH:${M2_HOME}/bin
+export M2_HOME=/home/mydata/maven/repo 
+export MAVEN_HOME=/home/mydata/maven/apache-maven-3.6.3
+export PATH=$PATH:${MAVEN_HOME}/bin
 # 刷新配置
 source /etc/profile         
 ```
@@ -78,6 +80,47 @@ docker run -p 80:80 --name nginx --restart always \
 -v /data/nginx/conf.d:/etc/nginx/conf.d \ 
 -v /data/nginx/logs:/var/log/nginx -d nginx  # 日志挂载
 ```
+> `nginx` 配置文件
+```
+# 反向代理配置（docker registry 服务）
+ location / {
+      proxy_pass http://127.0.0.1:5000;
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header Host $http_host;
+      client_max_body_size 1024m;
+ }
+# 网关服务配置
+ upstream gateway_server {
+     server 192.168.20.15:8096;
+     server 192.168.20.20:8096; 
+     server 192.168.20.35:8096;
+     keepalive 768; #长链接配置
+ }
+ server {
+         listen   3311;
+         server_name  localhost;
+         ignore_invalid_headers off;
+         client_max_body_size 0;
+         proxy_buffering off;
+         location / {
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header Host $http_host;
+              proxy_connect_timeout 300s;
+              proxy_http_version 1.1;
+              proxy_set_header Upgrade $http_upgrade; #长连接配置
+              proxy_set_header Connection "upgrade";
+              proxy_read_timeout 36000s;
+              proxy_send_timeout 36000s;
+              chunked_transfer_encoding off;
+              proxy_pass http://gateway_server;
+         }
+ }
+
+```
 ##### `MongoDB`
 ```bash
 docker run --name mongo \
@@ -87,7 +130,7 @@ docker run --name mongo \
 -v /data/mongo/log:/data/log \
 -d mongo
 
-docker exec -it mongo mongo admin
+docker exec -it mongo mongo admin #( docker exec -it mongo mongosh # mongo5.0以上的版本 )
 db.createUser({user:'admin',pwd:'admin',roles:[{role:'readWrite',db:'admin'}],})
 db.auth('admin','admin')
 show users
