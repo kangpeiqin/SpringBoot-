@@ -99,7 +99,7 @@ docker run -p 80:80 --name nginx --restart always \
      keepalive 768; #长链接配置
  }
  server {
-         listen   3311;
+         listen   1023;
          server_name  localhost;
          ignore_invalid_headers off;
          client_max_body_size 0;
