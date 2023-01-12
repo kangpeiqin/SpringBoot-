@@ -13,7 +13,8 @@
 可以帮我们省去服务迁移重新打包构建部署等繁琐的步骤。
 ### 基础环境配置与搭建
 #### Docker 的使用与安装
-> 具体可以参考：https://vuepress.mirror.docker-practice.com/，以下是简单的安装流程
+> - 镜像仓库：https://hub.docker.com/
+> - 具体可以参考：https://vuepress.mirror.docker-practice.com/，以下是简单的安装流程
 ```bash
 # 使用脚本自动安装
 curl -fsSL get.docker.com -o get-docker.sh
