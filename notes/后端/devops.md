@@ -121,6 +121,90 @@ docker run -p 80:80 --name nginx --restart always \
  }
 
 ```
+##### Redis
+> 单节点
+```bash
+# 单节点
+docker run -d --name redis --restart always -p 6379:6379 -v /home/mydata/redis/data:/data redis --appendonly yes --requirepass "2022@abc123.."
+```
+> 集群
+- 1、创建 redis-cluster.tmpl 模板（redis.conf 配置文件）
+```bash
+#端口
+port ${PORT}
+#非保护模式
+protected-mode no
+#启用集群模式
+cluster-enabled yes 
+cluster-config-file nodes.conf 
+#超时时间
+cluster-node-timeout 5000 
+#集群各节点IP地址
+cluster-announce-ip 192.168.0.111 
+#集群节点映射端口 
+cluster-announce-port ${PORT} 
+#集群总线端口 
+cluster-announce-bus-port 1${PORT} 
+#开启aof持久化策略
+appendonly yes
+#后台运行
+#daemonize yes
+#进程号存储
+pidfile /var/run/redis_${PORT}.pid 
+#集群加密
+#masterauth 123456
+#requirepass 123456
+```
+- 2、创建 docker 网络
+```bash
+docker network create redis-net
+```
+- 3、使用脚本 redis.sh 创建集群
+```bash
+#!/bin/bash 
+#在/data/redis/redis-cluster下生成conf和data目标，并生成配置信息 
+for port in `seq 7001 7006`;
+do
+  mkdir -p ./${port}/conf && PORT=${port} envsubst < ./redis-cluster.tmpl > ./${port}/conf/redis.conf && mkdir -p ./${port}/data; 
+done
+#创建6个redis容器
+for port in `seq 7001 7006`;
+do
+    docker run -d -it -p ${port}:${port} -p 1${port}:1${port} -v /data/redis/redis-cluster/${port}/conf/redis.conf:/usr/local/etc/redis/redis.conf -v /data/redis/redis-cluster/${port}/data:/data --privileged=true --restart always --name redis-${port} --net redis-net --sysctl net.core.somaxconn=1024 redis redis-server /usr/local/etc/redis/redis.conf;
+done
+#查找ip
+for port in `seq 7001 7006`; do
+echo -n "$(docker inspect --format '{{ (index .NetworkSettings.Networks "redis-net").IPAddress }}' "redis-${port}")":${port}" ";
+done
+#换行
+echo -e "\n"
+#输入信息
+read -p "请把输入要启动的docker容器名称，默认redis-7001:" DOCKER_NAME #判断是否为空
+if [ ! $DOCKER_NAME ];
+    then DOCKER_NAME='redis-7001';
+fi
+#进入容器
+docker exec -it redis-7001 /bin/bash
+```
+- 4、节点关联
+```bash
+# 进入到任意一个安装好的redis节点的bin目录，里面有个脚本对象redis-cli，
+docker exec -it redis-7001 bash
+cd /usr/local/bin/
+# 执行集群创建
+./redis-cli --cluster create 172.18.0.3:7002 172.18.0.4:7003 172.18.0.5:7004 172.18.0.6:7005 172.18.0.7:7006 --cluster-replicas 1 -a 123456
+# 验证
+redis-cli -p 7001 -c -a 123456
+cluster nodes
+```
+- 5、停止容器
+```bash
+#!/bin/bash
+docker stop redis-7001 redis-7002 redis-7003 redis-7004 redis-7005 redis-7006
+docker rm redis-7001 redis-7002 redis-7003 redis-7004 redis-7005 redis-7006
+rm -rf 7001 7002 7003 7004 7005 7006
+```
+
 ##### `MongoDB`
 ```bash
 docker run --name mongo \
