@@ -129,5 +129,9 @@ printenv | less
 # 查看特定环境变量
 echo $HOME
 ```
+## awk
+The basic function of awk is to search files for lines or other text units containing one or more patterns.
+
+
 ## 参考
 - 《Linux 命令行大全》
