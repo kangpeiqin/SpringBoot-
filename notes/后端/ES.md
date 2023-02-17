@@ -2,6 +2,8 @@
 ### Queries
  retrieve documents that match the criteria
  
+### CRUD
+
 
 
 
