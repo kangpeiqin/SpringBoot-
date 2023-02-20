@@ -4,6 +4,8 @@
 GET _cluster/health
 # 获取节点状态信息
 GET _nodes/stats
+# 查看所有的索引
+GET /_cat/indices?v
 ```
 ### CRUD
 #### Create
@@ -20,7 +22,7 @@ PUT index_name/_doc/document_id
 {
   "field": "value"
 }
-# 如果文档存在，则给出提示
+# 如果文档存在，则报错给出提示信息
 PUT index_name/_create/document_id
 {
   "field": "value"
@@ -51,6 +53,43 @@ DELETE index_name/_doc/id
 ```
 # 获取索引中的所有文档
 GET index_name/_search
+# 根据区间查询
+GET index_name/_search
+{
+  "query": {
+    "match": {
+      "field": {
+        "gte": "lowest value",
+        "lte": "highest value"
+      }
+    }
+  }
+}
+# 聚合查询
+GET index_name/_search
+{
+  "aggs": {
+    "name your aggregation": {  # 自己定义的分组名称
+      "terms": {
+        "field": "category", # 需要进行分组的字段
+        "size": 100
+      }
+    }
+  }
+}
+# 全文搜索，会对 search terms 进行分词，根据分词找到匹配的数据
+GET Enter_name_of_index_here/_search
+{
+  "query": {
+    "match": {
+      "field": {
+        "query": "search terms"
+      }
+    }
+  }
+}
+# 短语搜索，将短语当成一个整体进行搜索
+
 ```
 
 
@@ -69,4 +108,5 @@ GET index_name/_search
 
 
 ## 参考
-- https://github.com/LisaHJung/Part-2-Understanding-the-relevance-of-your-search-with-Elasticsearch-and-Kibana-
+- https://github.com/LisaHJung/Beginners-Crash-Course-to-Elastic-Stack-Series-Table-of-Contents
+- https://www.elastic.co/guide/cn/elasticsearch/guide/current/_phrase_search.html

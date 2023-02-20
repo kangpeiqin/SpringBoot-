@@ -212,7 +212,7 @@ JMM定义了线程和主内存之间的抽象关系：**线程之间的共享变
 > 单行模式（点号模式）、多行模式和大小写无关模式。分别对应
 `Pattern.DOTALL`、`Pattern.MULTILINE`和`Pattern.CASE_INSENSI-TIVE`
 
-```java
+```
 String str = "abc  def      hello.\n   world";
 // 1、字符串切分
 String[] fields = str.split("[\\s.]+");
