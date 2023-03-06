@@ -32,6 +32,7 @@
 - architect awesome：https://github.com/xingshaocheng/architect-awesome/blob/master/README.md
 - 书籍搜索：https://alibrary.top/query
 - 文档网站：https://www.wolai.com/
+- chatGTP: https://chatgpt.ddiu.me/
 ## 文章
 [十年设计工作的一些思考](https://mp.weixin.qq.com/s/AwL8y5uSBVuLIVg9RkSqmw)
 - 时间带来的危机感
