@@ -122,6 +122,10 @@ docker run -p 80:80 --name nginx --restart always \
  }
 
 ```
+##### Nacos
+```bash
+docker run --name nacos -e MODE=standalone -p 8848:8848 -p 9848:9848 -p 9849:9849 --privileged=true -d nacos/nacos-server:2.0.3
+```
 ##### Redis
 > 单节点
 ```bash
@@ -465,4 +469,5 @@ ENTRYPOINT ["java","-Xmx512m","-jar","/PROJECT_NAME-1.0-SNAPSHOT.jar"]
 # 指定维护者的名字
 MAINTAINER K
 ```
-
+## 参考链接
+- https://hub.docker.com
